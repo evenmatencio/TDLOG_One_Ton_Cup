@@ -22,6 +22,24 @@ class BoatGPSCoordinates(OneTonCupData):
     def load_data(self):
         self.data_import = pandas.read_csv(os.getcwd() + "/Random_data.csv", delimiter=',', header=0,
                                            usecols=['Latitude', 'Longitude'])
+    def print_data(self):
+        print(self.data_import)
+
+class Depth(OneTonCupData):
+    def __init__(self):
+        super().__init__()
+        self.data_import = None
+
+    def load_data(self):
+        self.data_import = pandas.read_csv(os.getcwd() + "/Random_data.csv", delimiter=',', header=0,
+                                           usecols=['Profondeur'])
+    def print_data(self):
+        print(self.data_import)
+
+coord_test = BoatGPSCoordinates()
+coord_test.load_data()
+
+coord_test.load_data()
 
 
 coord_test = BoatGPSCoordinates()
