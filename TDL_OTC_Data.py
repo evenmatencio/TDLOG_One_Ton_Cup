@@ -25,7 +25,7 @@ class BoatGPSCoordinates(OneTonCupData):
     def __init__(self, data_import):
         super().__init__()
         self.data_import = data_import
-<<<<<<< HEAD
+
 
     @staticmethod
     def from_pandas(dataframe):
@@ -33,19 +33,11 @@ class BoatGPSCoordinates(OneTonCupData):
         return BoatGPSCoordinates(data_import)
 
 
-=======
-
-    @staticmethod
-    def from_pandas(dataframe):
-        data_import=dataframe["Latitude", "Longitude"]
-        return BoatGPSCoordinates(data_import)
->>>>>>> ea42a034f92ee6be35ff71945b038ec0b743f740
-
 class Depth(OneTonCupData):
     def __init__(self, data_import):
         super().__init__()
         self.data_import = data_import
-<<<<<<< HEAD
+
 
     @staticmethod
     def from_pandas(dataframe):
@@ -87,8 +79,6 @@ class StreamVelocity(OneTonCupData):
     def from_pandas(dataframe):
         data_import = dataframe['Vitesse courant']
         return StreamVelocity(data_import)
-
-=======
 
     @staticmethod
     def from_pandas(dataframe):
@@ -188,7 +178,7 @@ class Pressure(OneTonCupData):
     def from_pandas(dataframe):
         data_import = dataframe["Pression atmospherique"]
         return BoatGPSCoordinates(data_import)
->>>>>>> ea42a034f92ee6be35ff71945b038ec0b743f740
+
 
 
 
