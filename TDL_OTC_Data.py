@@ -1,8 +1,4 @@
-import os
-import pandas
 from queue import Queue
-
-dataframe = pandas.read_csv(os.getcwd() + '/Random_data.csv', delimiter=',', header=0)
 
 """ This module contains the parent Data class for the OTC software project
  and the subclasses related to the different data used in the software """
@@ -25,10 +21,9 @@ class BoatGPSCoordinates(OneTonCupData):
         super().__init__()
         self.data_import = data_import
 
-
     @staticmethod
     def from_pandas(dataframe):
-        data_import = dataframe["Latitude", 'Longitude']
+        data_import = dataframe[['Longitude', 'Latitude']]
         return BoatGPSCoordinates(data_import)
 
 
@@ -37,25 +32,22 @@ class Depth(OneTonCupData):
         super().__init__()
         self.data_import = data_import
 
-
     @staticmethod
     def from_pandas(dataframe):
         data_import = dataframe["Profondeur"]
         return Depth(data_import)
 
 
-
 class BuoyCoordinates(OneTonCupData):
-    def __int__(self, data_import):
+    def __init__(self, data_import):
         super().__init__()
         self.data_import = data_import
 
     @staticmethod
     def from_pandas(dataframe):
-        data_import = dataframe['Latitude bouee 1', 'Longitude bouee 1', 'Latitude bouee 2', 'Longitude bouee 2',
-                                'Latitude bouee 3', 'Longitude bouee 3', 'Latitude bouee 4', 'Longitude bouee 4']
+        data_import = dataframe[['Latitude bouee 1', 'Longitude bouee 1', 'Latitude bouee 2', 'Longitude bouee 2',
+                                 'Latitude bouee 3', 'Longitude bouee 3', 'Latitude bouee 4', 'Longitude bouee 4']]
         return BuoyCoordinates(data_import)
-
 
 
 class Temperature(OneTonCupData):
@@ -65,7 +57,7 @@ class Temperature(OneTonCupData):
 
     @staticmethod
     def from_pandas(dataframe):
-        data_import = dataframe['Temperature']
+        data_import = dataframe["Temperature"]
         return Temperature(data_import)
 
 
@@ -76,7 +68,7 @@ class StreamVelocity(OneTonCupData):
 
     @staticmethod
     def from_pandas(dataframe):
-        data_import = dataframe['Vitesse courant']
+        data_import = dataframe["Vitesse courant"]
         return StreamVelocity(data_import)
 
 
@@ -109,7 +101,7 @@ class BoatAngles(OneTonCupData):
 
     @staticmethod
     def from_pandas(dataframe):
-        data_import = dataframe["Angle de gite","Angle de tangage"]
+        data_import = dataframe[["Angle de gite", "Angle de tangage"]]
         return BoatAngles(data_import)
 
 
@@ -120,8 +112,9 @@ class Speeds(OneTonCupData):
 
     @staticmethod
     def from_pandas(dataframe):
-        data_import = dataframe["Vitesse bateau", "VMG"]
+        data_import = dataframe[["Vitesse bateau", "VMG"]]
         return Speeds(data_import)
+
 
 class FlightHeight(OneTonCupData):
     def __init__(self, data_import):
@@ -133,6 +126,7 @@ class FlightHeight(OneTonCupData):
         data_import = dataframe["Hauteur de vol"]
         return FlightHeight(data_import)
 
+
 class WingAngles(OneTonCupData):
     def __init__(self, data_import):
         super().__init__()
@@ -140,8 +134,9 @@ class WingAngles(OneTonCupData):
 
     @staticmethod
     def from_pandas(dataframe):
-        data_import = dataframe["Vrillage angle 1","Vrillage angle 2","Cambrure aile"]
+        data_import = dataframe[["Vrillage angle 1", "Vrillage angle 2", "Cambrure aile"]]
         return WingAngles(data_import)
+
 
 class WindAngles(OneTonCupData):
     def __init__(self, data_import):
@@ -150,8 +145,9 @@ class WindAngles(OneTonCupData):
 
     @staticmethod
     def from_pandas(dataframe):
-        data_import = dataframe["Angle au vent reel","Angle au vent apparent"]
+        data_import = dataframe[["Angle au vent reel", "Angle au vent apparent"]]
         return WindAngles(data_import)
+
 
 class WindSpeed(OneTonCupData):
     def __init__(self, data_import):
@@ -160,8 +156,9 @@ class WindSpeed(OneTonCupData):
 
     @staticmethod
     def from_pandas(dataframe):
-        data_import = dataframe["Vitesse du vent","Beaufort"]
+        data_import = dataframe[["Vitesse du vent", "Beaufort"]]
         return WindSpeed(data_import)
+
 
 class Pressure(OneTonCupData):
     def __init__(self, data_import):
@@ -172,9 +169,3 @@ class Pressure(OneTonCupData):
     def from_pandas(dataframe):
         data_import = dataframe["Pression atmospherique"]
         return Pressure(data_import)
-
-
-
-
-
-
