@@ -2,6 +2,8 @@ import os
 import pandas
 from queue import Queue
 
+dataframe = pandas.read_csv(os.getcwd() + '/Random_data.csv', delimiter=',', header=0)
+
 """ This module contains the parent Data class for the OTC software project
  and the subclasses related to the different data used in the software """
 
@@ -16,9 +18,6 @@ class OneTonCupData:
 
     def print_data(self):
         print(self.data_import)
-
-
-dataframe = pandas.read_csv(os.getcwd() + '/Random_data.csv', delimiter=',', header=0)
 
 
 class BoatGPSCoordinates(OneTonCupData):
@@ -80,11 +79,6 @@ class StreamVelocity(OneTonCupData):
         data_import = dataframe['Vitesse courant']
         return StreamVelocity(data_import)
 
-    @staticmethod
-    def from_pandas(dataframe):
-        data_import = dataframe["Profondeur"]
-        return BoatGPSCoordinates(data_import)
-
 
 class Cap(OneTonCupData):
     def __init__(self, data_import):
@@ -94,7 +88,7 @@ class Cap(OneTonCupData):
     @staticmethod
     def from_pandas(dataframe):
         data_import = dataframe["Cap"]
-        return BoatGPSCoordinates(data_import)
+        return Cap(data_import)
 
 
 class RoadDeviation(OneTonCupData):
@@ -105,7 +99,7 @@ class RoadDeviation(OneTonCupData):
     @staticmethod
     def from_pandas(dataframe):
         data_import = dataframe["Ecart a la route"]
-        return BoatGPSCoordinates(data_import)
+        return RoadDeviation(data_import)
 
 
 class BoatAngles(OneTonCupData):
@@ -116,7 +110,7 @@ class BoatAngles(OneTonCupData):
     @staticmethod
     def from_pandas(dataframe):
         data_import = dataframe["Angle de gite","Angle de tangage"]
-        return BoatGPSCoordinates(data_import)
+        return BoatAngles(data_import)
 
 
 class Speeds(OneTonCupData):
@@ -127,7 +121,7 @@ class Speeds(OneTonCupData):
     @staticmethod
     def from_pandas(dataframe):
         data_import = dataframe["Vitesse bateau", "VMG"]
-        return BoatGPSCoordinates(data_import)
+        return Speeds(data_import)
 
 class FlightHeight(OneTonCupData):
     def __init__(self, data_import):
@@ -137,7 +131,7 @@ class FlightHeight(OneTonCupData):
     @staticmethod
     def from_pandas(dataframe):
         data_import = dataframe["Hauteur de vol"]
-        return BoatGPSCoordinates(data_import)
+        return FlightHeight(data_import)
 
 class WingAngles(OneTonCupData):
     def __init__(self, data_import):
@@ -147,7 +141,7 @@ class WingAngles(OneTonCupData):
     @staticmethod
     def from_pandas(dataframe):
         data_import = dataframe["Vrillage angle 1","Vrillage angle 2","Cambrure aile"]
-        return BoatGPSCoordinates(data_import)
+        return WingAngles(data_import)
 
 class WindAngles(OneTonCupData):
     def __init__(self, data_import):
@@ -157,7 +151,7 @@ class WindAngles(OneTonCupData):
     @staticmethod
     def from_pandas(dataframe):
         data_import = dataframe["Angle au vent reel","Angle au vent apparent"]
-        return BoatGPSCoordinates(data_import)
+        return WindAngles(data_import)
 
 class WindSpeed(OneTonCupData):
     def __init__(self, data_import):
@@ -167,7 +161,7 @@ class WindSpeed(OneTonCupData):
     @staticmethod
     def from_pandas(dataframe):
         data_import = dataframe["Vitesse du vent","Beaufort"]
-        return BoatGPSCoordinates(data_import)
+        return WindSpeed(data_import)
 
 class Pressure(OneTonCupData):
     def __init__(self, data_import):
@@ -177,7 +171,7 @@ class Pressure(OneTonCupData):
     @staticmethod
     def from_pandas(dataframe):
         data_import = dataframe["Pression atmospherique"]
-        return BoatGPSCoordinates(data_import)
+        return Pressure(data_import)
 
 
 
