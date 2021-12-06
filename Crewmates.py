@@ -1,6 +1,4 @@
-import os
-import pandas
-from queue import Queue
+import TDL_OTC_Data as Data
 
 
 """This module contains the classes for the different members of the sailing team"""
@@ -17,26 +15,49 @@ from queue import Queue
    Foilsman: Depth, Flight Heigth, Pitching (Tanguage) angle, List angle (angle de list), Deviation from the course, 
    Wingsman: Vrillage angles, Cambrure angles, Wind Speed, Apparent wind, True Wind """
 
-class Crewmate():
-    def __init__(self, name, dataframe):
-        self.mate_name=name
-        self.boat_coordinates=BoatGPSCoordinates.frompandas(dataframe)
-        self.depth=Depth.frompandas(dataframe)
-        self.buoy_coordinates=BuoyCoordinates.frompandas(dataframe)
-        self.temperature=Temperature.frompandas(dataframe)
-        self.stream_velocity=StreamVelocity.frompandas(dataframe)
-        self.cap=Cap.frompandas(dataframe)
-        self.road_deviation=RoadDeviation.frompandas(dataframe)
-        self.boat_angles=BoatAngles.frompandas(dataframe)
-        self.speed=Speed.frompandas(dataframe)
-        self.flight_height=FlightHeight.frompandas(dataframe)
-        self.wing_angles=WingAngles.frompandas(dataframe)
-        self.wind_angles = WindAngles.frompandas(dataframe)
-        self.wind_speed = WindSpeed.frompandas(dataframe)
-        self.pressure=Pressure.frompandas(dataframe)
+class CrewMate:
+    def __init__(self, temperature, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap, road_deviation,
+                 boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed, pressure):
+        self.gps_coordinate = gps_coordinates
+        self.temperature = temperature
+        self.depth = depth
+        self.buoy_coordinates = buoy_coordinates
+        self.temperature = temperature
+        self.stream_velocity = stream_velocity
+        self.cap = cap
+        self.road_deviation = road_deviation
+        self.boat_angles = boat_angles
+        self.speed = speed
+        self.flight_height = flight_height
+        self.wing_angles = wing_angles
+        self.wind_speed = wind_speed
+        self.wind_angles = wind_angles
+        self.pressure = pressure
 
 
-class Helmsman(Crewmate):
+    @staticmethod
+    def from_pandas(self, dataframe):
+        gps_coordinates = Data.BoatGPSCoordinates.frompandas(dataframe)
+        depth = Data.Depth.frompandas(dataframe)
+        buoy_coordinates = Data.BuoyCoordinates.frompandas(dataframe)
+        temperature = Data.Temperature.frompandas(dataframe)
+        stream_velocity = Data.StreamVelocity.frompandas(dataframe)
+        cap = Data.Cap.frompandas(dataframe)
+        road_deviation = Data.RoadDeviation.frompandas(dataframe)
+        boat_angles = Data.BoatAngles.frompandas(dataframe)
+        speed = Data.Speed.frompandas(dataframe)
+        flight_height = Data.FlightHeight.frompandas(dataframe)
+        wing_angles = Data.WingAngles.frompandas(dataframe)
+        wind_angles = Data.WindAngles.frompandas(dataframe)
+        wind_speed = Data.WindSpeed.frompandas(dataframe)
+        pressure = Data.Pressure.frompandas(dataframe)
+        return CrewMate(temperature, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap, road_deviation,
+                        boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed, pressure)
+
+
+
+
+class Helmsman(CrewMate):
     def __init__(self, name, dataframe):
         super.__init__(self, name, dataframe)
     def display(self):
@@ -54,7 +75,7 @@ class Helmsman(Crewmate):
         self.stream_velocity.print_data()
 
 
-class Foilsman(Crewmate):
+class Foilsman(CrewMate):
     def __init__(self, name, dataframe):
         super().__init__(self, name, dataframe)
     def display(self):
@@ -64,7 +85,7 @@ class Foilsman(Crewmate):
         self.road_deviation.print_data()
         self.flight_height.print_data()
 
-class Wingsman(Crewmate):
+class Wingsman(CrewMate):
     def __init__(self, name, dataframe):
         super().__init__(self, name, dataframe)
     def display(self):
