@@ -1,1 +1,0 @@
-# TDLOG_One_Ton_Cup
