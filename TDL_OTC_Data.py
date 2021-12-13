@@ -169,3 +169,14 @@ class Pressure(OneTonCupData):
     def from_pandas(dataframe):
         data_import = dataframe["Pression atmospherique"]
         return Pressure(data_import)
+    
+class BatteryPowerLevel(OneTonCupData):
+    def __init__(self, data_import):
+        super().__init__()
+        self.data_import = data_import
+
+    @staticmethod
+    def from_pandas(dataframe):
+        data_import = dataframe["Niveau batterie"]
+        return BatteryPowerLevel(data_import)
+    
