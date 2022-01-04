@@ -206,12 +206,12 @@ class AnalogGaugeWidget(QWidget):
         ################################################################################################
         # ENABLE NEEDLE POLYGON BY DEFAULT
         ################################################################################################
-        self.enable_Needle_Polygon = True
+        self.enable_Needle_Polygon = False
 
         ################################################################################################
         # ENABLE NEEDLE MOUSE TRACKING BY DEFAULT
         ################################################################################################
-        self.setMouseTracking(False)
+        self.setMouseTracking(True)
 
         ################################################################################################
         # SET GAUGE UNITS
@@ -1326,7 +1326,7 @@ class AnalogGaugeWidget(QWidget):
         colored_scale_polygon = self.create_polygon_pie(
                 ((self.widget_diameter / 8) - (self.pen.width() / 2)),
                 0,
-                self.scale_angle_start_value, 360, False)
+                self.scale_angle_start_value, 360, True)
 
         # 150.0 0.0 131 360
 
