@@ -16,15 +16,13 @@ import TDL_OTC_Data as Data
 
 
 class CrewMate:
-    def __init__(self, name, temperature, boat_coordinates, depth, buoy_coordinates, stream_velocity, cap,
+    def __init__(self, name, boat_coordinates, depth, buoy_coordinates, stream_velocity, cap,
                  road_deviation,
-                 boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed, pressure):
+                 boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed):
         self.name = name
         self.boat_coordinates = boat_coordinates
-        self.temperature = temperature
         self.depth = depth
         self.buoy_coordinates = buoy_coordinates
-        self.temperature = temperature
         self.stream_velocity = stream_velocity
         self.cap = cap
         self.road_deviation = road_deviation
@@ -34,7 +32,6 @@ class CrewMate:
         self.wing_angles = wing_angles
         self.wind_speed = wind_speed
         self.wind_angles = wind_angles
-        self.pressure = pressure
 
     @staticmethod
     def from_pandas(name, dataframe):
@@ -54,7 +51,7 @@ class CrewMate:
         pressure = Data.Pressure.from_pandas(dataframe)
         return CrewMate(name, temperature, boat_coordinates, depth, buoy_coordinates, stream_velocity, cap,
                         road_deviation,
-                        boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed, pressure)
+                        boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed)
 
     def display(self):
         self.road_deviation.print_data()
@@ -73,16 +70,24 @@ class CrewMate:
         self.wing_angles.print_data()
         self.wind_speed.print_data()
         self.road_deviation.print_data()
-        self.pressure.print_data()
 
 
 class Helmsman(CrewMate):
-    def __init__(self, name, temperature, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
+    def __init__(self, name, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
                  road_deviation,
                  boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed, pressure):
-        super.__init__(self, name, self, temperature, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
+        super.__init__(self, name, self, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
                        road_deviation,
-                       boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed, pressure)
+                       boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed)
+        self.MainWindowHelmsman = QtWidgets.QMainWindow()
+        #Nom de la classe Ui_MainWIndow...
+        self.ui_helmsman = Ui_MainWindowHelmsman
+        self.ui_helmsman.setup_Ui(self.MainWindowHelmsman)
+
+
+    def update(self, i):
+        self.ui_helmsman.depth_widget.depth_value = self.depth[i]
+
 
     def display(self):
         """
@@ -100,12 +105,12 @@ class Helmsman(CrewMate):
 
 
 class Foilsman(CrewMate):
-    def __init__(self, name, temperature, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
+    def __init__(self, name, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
                  road_deviation,
                  boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed, pressure):
-        super().__init__(self, temperature, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
+        super().__init__(self, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
                          road_deviation,
-                         boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed, pressure)
+                         boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed)
 
     def display(self):
         self.depth.print_data()
@@ -113,18 +118,27 @@ class Foilsman(CrewMate):
         self.wind_speed.print_data()
         self.road_deviation.print_data()
         self.flight_height.print_data()
+        self.buoy_coordinates.print_data()
+        self.speed.print_data()
+        self.boat_coordinates.print_data()
 
+    def update(self, i):
+        self.ui_helmsman.boat_angles_widget.value_gite = self.boat_angles[0][i]
+        self.ui_helmsman.boat_angles.value_tangage = self.boat_angles[1][i]
 
 class Wingsman(CrewMate):
-    def __init__(self, name, temperature, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
+    def __init__(self, name, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
                  road_deviation,
                  boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed, pressure):
-        super().__init__(self, name, temperature, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
+        super().__init__(self, name, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
                          road_deviation,
-                         boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed, pressure)
+                         boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed)
 
     def display(self):
         self.wing_angles.print_data()
         self.wind_speed.print_data()
         self.road_deviation.print_data()
-        self.pressure.print_data()
+        self.buoy_coordinates.print_data()
+        self.speed.print_data()
+        self.boat_coordinates.print_data()
+
