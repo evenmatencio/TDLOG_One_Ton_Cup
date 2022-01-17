@@ -11,10 +11,22 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Form(object):
+class Ui_WindSpeed(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(815, 816)
+        
+        #########################################
+        ## VALEURS DES DONNES AFFICHEES
+        ###########################################
+        # Ici je choisis des valeurs par défauts, qui vont être modifiées dans la classe Equipier
+        self.true_speed_value=16
+        self.apparent_wind_speed_value=24
+        
+        # Je n'ai pas encore mis le LCD number correspondant au Beaufort
+        self.beaufort_value=4
+        
+        
         self.label = QtWidgets.QLabel(Form)
         self.label.setGeometry(QtCore.QRect(0, 100, 800, 600))
         self.label.setText("")
@@ -22,6 +34,9 @@ class Ui_Form(object):
         self.label.setObjectName("label")
         self.dial = QtWidgets.QDial(Form)
         self.dial.setGeometry(QtCore.QRect(190, 170, 401, 381))
+       
+        
+        # MISE EN PLACE DE LA FENETRE 
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -158,10 +173,14 @@ class Ui_Form(object):
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ToolTipText, brush)
+        
+        # POINTEUR POUR LA VITESSE 
         self.dial.setPalette(palette)
         self.dial.setMaximum(40)
-        self.dial.setProperty("value", 16)
+        self.dial.setProperty("value", self.valeur_vitesse)
         self.dial.setObjectName("dial")
+        
+        ## TEXTE QUI AFFICHE APPARENT WIND SPEED
         self.label_2 = QtWidgets.QLabel(Form)
         self.label_2.setGeometry(QtCore.QRect(210, 610, 401, 101))
         font = QtGui.QFont()
@@ -174,6 +193,8 @@ class Ui_Form(object):
         font = QtGui.QFont()
         font.setFamily("Yu Gothic Light")
         font.setPointSize(23)
+        
+        # TEXTE QUI AFFICHE KNOTS 
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
         self.lcdNumber = QtWidgets.QLCDNumber(Form)
@@ -184,6 +205,8 @@ class Ui_Form(object):
         font = QtGui.QFont()
         font.setFamily("Yu Gothic Light")
         font.setPointSize(15)
+        
+        # TEXTE QUI AFFICHE TRUE WIND SPEED
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
         self.lcdNumber_2 = QtWidgets.QLCDNumber(Form)
@@ -194,6 +217,8 @@ class Ui_Form(object):
         font = QtGui.QFont()
         font.setFamily("Yu Gothic Light")
         font.setPointSize(15)
+        
+        # TEXTE QUI AFFICHE KNOTS (pour TRUE WIND SPEED)
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
 
@@ -213,7 +238,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
-    ui = Ui_Form()
+    ui = Ui_WindSpeed()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
