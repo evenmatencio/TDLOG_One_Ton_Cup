@@ -93,8 +93,18 @@ class Helmsman(CrewMate):
 
 
     def update(self, i):
+        #Ajouter les widgets des positions gps
         self.ui_helmsman.depth_widget.depth_value = self.depth[i]
-
+        self.ui_helmsman.cap_widget.cap_value = self.cap[i]
+        #Ajouter vitesse du courant
+        self.ui_helmsman.wind_angles_widget.true_wind_value = self.wind_angles[0][i]
+        self.ui_helmsman.wind_angles_widget.apparent_wind_value = self.wind_angles[1][i]
+        self.ui_helmsman.wind_speed_widget.true_wind_angle_value = self.wind_angles[0][i]
+        self.ui_helmsman.wind_speed_widget.apparent_wind_angle_value = self.wind_angles[1][i]
+        self.ui_helmsman.VMG_widget.VMG_value = self.speed[1][i]
+        self.ui_helmsman.boat_speed_widget.true_speed_value = self.speed[0][i]
+        self.ui_helmsman.wind_speed_widget.apparent_wind_speed_value = self.speed[0][i]
+        self.ui_helmsman.wind_speed_widget.beaufort_value = self.speed[1][i]
 
     def display(self):
         """
