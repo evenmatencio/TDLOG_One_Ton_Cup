@@ -1,6 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import TDL_OTC_Data as Data
-import premiere_interface_menu_inter as HelmsmanWindow
+import Helmsman.HelmsmanMenu as HelmMenu
+import Helmsman.GiteWidget as HelmGite
+import Helmsman.WindAnglewidget as HelmWindAngle
 
 """This module contains the classes for the different members of the sailing team"""
 
@@ -81,15 +83,24 @@ class Helmsman(CrewMate):
         super().__init__(name, temperature, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
                        road_deviation,
                        boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed)
-        self.main_window_helmsman = QtWidgets.QMainWindow()
-        #Nom de la classe Ui_MainWIndow...
-        #self.ui_helmsman = HelmsmanWindow.Ui_MainWindowHelmsman()
-        #self.ui_helmsman.setupUi(self.main_window_helmsman)
         self.pressure = pressure
+        # Window for helmsman menu
+        self.main_window_helmsman = QtWidgets.QMainWindow()
+        self.ui_helmsman = HelmMenu.Ui_MainWindowHelmsman()
+        self.ui_helmsman.setupUi(self.main_window_helmsman)
+        
+        # Widgets for helmsman
+        self.gite_window = QtWidgets.QMainWindow()
+        self.gite_widget = HelmGite.Ui_GiteWidget()
+        self.gite_widget.setupUi(self.gite_window)
+
+        
 
     def from_pandas(self, dataframe):
         super().from_pandas(dataframe)
         self.pressure = Data.Pressure.from_pandas(dataframe)
+        
+    
 
 
     def update(self, i):

@@ -1,0 +1,10 @@
+setup.py
+Helmsman/GiteWidget.py
+Helmsman/HelmsmanMenu.py
+Helmsman/WindAnglewidget.py
+Helmsman/__init__.py
+Helmsman.egg-info/PKG-INFO
+Helmsman.egg-info/SOURCES.txt
+Helmsman.egg-info/dependency_links.txt
+Helmsman.egg-info/not-zip-safe
+Helmsman.egg-info/top_level.txt

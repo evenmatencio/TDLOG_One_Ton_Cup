@@ -1,17 +1,18 @@
 import os
 import sys
-sys.path.insert(0, os.path.join( os.getcwd(), 'Helmsman') )
-sys.path.insert(0, os.path.join( os.getcwd(), 'Helmsman', 'widgets'))
+import pandas
+from PyQt5 import QtCore, QtGui, QtWidgets
+import Helmsman.HelmsmanMenu as HelmMenu
+import Helmsman.GiteWidget as HelmGite
+import Helmsman.WindAnglewidget as HelmWindAngle
+# sys.path.insert(0, os.path.join( os.getcwd(), 'Helmsman') )
+# sys.path.insert(0, os.path.join( os.getcwd(), 'Helmsman', 'widgets'))
 
-try :
-    
-    import pandas
-    from PyQt5 import QtCore, QtGui, QtWidgets
-    import mainwindow1_py as MainWindow
+try:
+    import MainWindow
     import Crewmates
 
 except Exception as e:
-    
     print(e)
 
 
@@ -23,10 +24,10 @@ def main():
 
     dataframe = pandas.read_csv(os.getcwd() + '/Random_data.csv', delimiter=',', header=0)
     helm = Crewmates.Helmsman( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    #helm.from_pandas(dataframe)
+    helm.from_pandas(dataframe)
     #foil = Crew.Foilsman.from_pandas("Brad", dataframe)
     #wing = Crew.Wingsman.from_pandas("Cristina", dataframe)
-    app = QtWidgets.QApplication(sys.argv)
+    app = MainWindow.QtWidgets.QApplication(sys.argv)
 
     #Chargement et affichage de la première fenêtre
     #------------------------------------------------------------------------------------------------------
@@ -35,7 +36,8 @@ def main():
     ui = MainWindow.Ui_MainWindow()
     ui.setupUi(main_window)
     main_window.show()
-    #helm.main_window_helmsman.show()
+    # helm.main_window_helmsman.show()
+    # helm.gite_window.show()
 
 
     #Chargement des différentes fenêtres des équipiers : à faire dans les classes crewmate init de l'attribut window de chacun
@@ -51,7 +53,9 @@ def main():
 
     #Choix de l'équipier
     # ui.foilsman_button.clicked.connect(MainWindowFoil.show)
-    # ui.helmsman_button.clicked.connect(helm.main_window_helmsman.show())
+    ui.helmsman_button.clicked.connect(helm.main_window_helmsman.show)
+    helm.ui_helmsman.gite_button.clicked.connect(helm.gite_window.show)
+    # helm.ui_helmsman.gite_button.clicked.connect(helm.ui_helmsman.show_gite)
     # ui.wingsman_button.clicked.connect(MainWindowWing.show)
     # for i in range(len(dataframe)):
 

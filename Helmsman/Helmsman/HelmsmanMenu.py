@@ -1,15 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-import gite_widget as GiteWidget
-import WindAnglewidget as WindAngleWidget
+
 
 
 class Ui_MainWindowHelmsman(object):
-
-    def __init__(self):
-        self.gite_window = QtWidgets.QMainWindow()
-        self.gite_widget = GiteWidget.Ui_GiteWidget()
-        self.wind_angle_window = QtWidgets.QMainWindow()
-        self.wind_angle_widget = WindAngleWidget.Ui_Form()
 
 
     def setupUi(self, MainWindow):
@@ -72,18 +65,18 @@ class Ui_MainWindowHelmsman(object):
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.pushButton = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
+        self.gite_button = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton.sizePolicy().hasHeightForWidth())
-        self.pushButton.setSizePolicy(sizePolicy)
-        self.pushButton.setMinimumSize(QtCore.QSize(0, 100))
+        sizePolicy.setHeightForWidth(self.gite_button.sizePolicy().hasHeightForWidth())
+        self.gite_button.setSizePolicy(sizePolicy)
+        self.gite_button.setMinimumSize(QtCore.QSize(0, 100))
         font = QtGui.QFont()
         font.setFamily("Yu Gothic Light")
-        self.pushButton.setFont(font)
-        self.pushButton.setObjectName("pushButton")
-        self.verticalLayout_3.addWidget(self.pushButton)
+        self.gite_button.setFont(font)
+        self.gite_button.setObjectName("gite_button")
+        self.verticalLayout_3.addWidget(self.gite_button)
         self.pushButton_2 = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
@@ -138,7 +131,7 @@ class Ui_MainWindowHelmsman(object):
         MainWindow.setWindowTitle(_translate("HelmsmanWindow", "HemlsmanWindow"))
         self.lineEdit_2.setText(_translate("HelmsmanWindow", "Helmsman"))
         self.lineEdit.setText(_translate("HelmsmanWindow", "Menu"))
-        self.pushButton.setText(_translate("HelmsmanWindow", "Map - Position"))
+        self.gite_button.setText(_translate("HelmsmanWindow", "Map - Position"))
         self.pushButton_2.setText(_translate("HelmsmanWindow", "Depth"))
         self.pushButton_3.setText(_translate("HelmsmanWindow", "Apparent wind"))
         self.pushButton_4.setText(_translate("HelmsmanWindow", "VMG"))
