@@ -8,6 +8,16 @@ import Helmsman.WindAnglewidget as HelmWindAngle
 # sys.path.insert(0, os.path.join( os.getcwd(), 'Helmsman') )
 # sys.path.insert(0, os.path.join( os.getcwd(), 'Helmsman', 'widgets'))
 
+'''
+A commenter : 
+    - sur main.py :
+        ¤ L.45/46 
+        ¤ L.63/64
+    - sur Crewmates.py : 
+        ¤ L.3/4/5
+        ¤ L.87-->L.95
+'''
+
 try:
     import MainWindow
     import Crewmates
