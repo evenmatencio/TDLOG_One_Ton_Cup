@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Form(object):
+class Ui_WindSpeed(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(815, 816)

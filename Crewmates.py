@@ -1,12 +1,12 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import TDL_OTC_Data as Data
 import UpdatingSignal
-import Helmsman.Helmsman.HelmsmanMenu as HelmMenu
-import Helmsman.Helmsman.gite_tangage_py as HelmGite
-import Helmsman.Helmsman.cappy1 as HelmCap
-import Helmsman.Helmsman.windanglespy as HelmWindAngles
-import Helmsman.Helmsman.prof_py as HelmDepth
-import Helmsman.Helmsman.windspeed2 as HelmWindSpeed
+import Helmsman.HelmsmanMenu as HelmMenu
+import Helmsman.gite_tangage_py as HelmGite
+import Helmsman.cappy1 as HelmCap
+import Helmsman.windanglespy as HelmWindAngles
+import Helmsman.prof_py as HelmDepth
+import Helmsman.windspeed2 as HelmWindSpeed
 
 
 
@@ -99,29 +99,31 @@ class Helmsman(CrewMate):
         self.ui_helmsman = HelmMenu.Ui_MainWindowHelmsman()
         self.ui_helmsman.setupUi(self.main_window_helmsman)
 
-
+        # Widgets for helmsman and its windows
         self.cap_window = QtWidgets.QMainWindow()
-        self.cap_widget = HelmCap.Ui_cap()
-        self.cap_widget.setupUi(self.cap_window)
+        self.cap_widget = HelmCap.Ui_Cap()
         self.depth_window = QtWidgets.QMainWindow()
-        self.depth_widget = HelmDepth.Ui_depth()
-        self.depth_widget.setupUi(self.depth_window)
+        self.depth_widget = HelmDepth.Ui_Depth()
         self.wind_angles_window = QtWidgets.QMainWindow()
-        self.wind_angles_widget = HelmWindAngles.Ui_wind_angles()
-        self.wind_angles_widget.setupUi(self.wind_angles_window)
+        self.wind_angles_widget = HelmWindAngles.Ui_WindAngles()
         self.wind_speed_window = QtWidgets.QMainWindow()
-        self.wind_speed_widget = HelmWindSpeed.Ui_wind_angles()
-        self.wind_speed_widget.setupUi(self.wind_speed_window)
+        self.wind_speed_widget = HelmWindSpeed.Ui_WindSpeed()
 
         
 
+    def depth_update(self, i):
+        self.depth_window.close()
+        self.depth_widget.prof_nb.display(int(self.depth.data_import[i]))
+        self.depth_widget.prof_boat.setPixmap(QtGui.QPixmap("Helmsman/Helmsman/prof.png"))
+        self.depth_window.show()
+        print(f"depth.data_import = {self.depth.data_import[i]}")
+
 
     
-    def gite_display_and_update(self):
-        self.gite_window.close()
-        #self.gite_widget.lcdNumber.display(int(self.depth.data_import[0]))
-        self.gite_widget.setupUi(self.gite_window, int(self.depth.data_import[0]))
-        self.gite_window.show()
+    def depth_display_and_update(self):
+        self.depth_window.close()
+        self.depth_widget.setupUi(self.depth_window, int(self.depth.data_import[0]))
+        self.depth_window.show()
         self.updating_value.emit_signal()
         
 
@@ -135,12 +137,7 @@ class Helmsman(CrewMate):
     
 
 
-    def gite_update(self, i):
-        self.gite_window.close()
-        #self.gite_widget.setupUi(self.gite_window())
-        self.gite_widget.lcdNumber.display(int(self.depth.data_import[i]))
-        self.gite_window.show()
-        print(f"Rentre dans gite_update : depth.data_import = {self.depth.data_import[i]}")
+
 
 
 

@@ -11,31 +11,30 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_prof(object):
-    def setupUi(self, prof):
+class Ui_Depth(object):
+    def setupUi(self, Form, value):
         #Widget prof
-        prof.setObjectName("prof")
-        prof.resize(800, 800)
-        prof.setContextMenuPolicy(QtCore.Qt.NoContextMenu)
+        Form.setObjectName("prof")
+        Form.resize(800, 800)
+        Form.setContextMenuPolicy(QtCore.Qt.NoContextMenu)
 
         #Image prof_boat dans label
-        self.prof_boat = QtWidgets.QLabel(prof)
+        self.prof_boat = QtWidgets.QLabel(Form)
         self.prof_boat.setGeometry(QtCore.QRect(70, 110, 641, 531))
         self.prof_boat.setText("")
         self.prof_boat.setPixmap(QtGui.QPixmap("prof.png"))
         self.prof_boat.setObjectName("prof_boat")
-        self.prof_nb = QtWidgets.QLCDNumber(prof)
+        self.prof_nb = QtWidgets.QLCDNumber(Form)
         self.prof_nb.setGeometry(QtCore.QRect(390, 420, 101, 51))
         self.prof_nb.setFrameShape(QtWidgets.QFrame.Box)
         self.prof_nb.setFrameShadow(QtWidgets.QFrame.Plain)
         self.prof_nb.setLineWidth(4)
         self.prof_nb.setMidLineWidth(0)
-        self.prof_nb.setProperty("value", 54.2)
-        self.prof_nb.setProperty("intValue", 54)
+        self.prof_nb.setProperty("value", value)
         self.prof_nb.setObjectName("prof_nb")
 
         #m pour mètres text edit
-        self.m = QtWidgets.QTextEdit(prof)
+        self.m = QtWidgets.QTextEdit(Form)
         self.m.setGeometry(QtCore.QRect(495, 428, 41, 51))
         font = QtGui.QFont()
         font.setFamily("Yu Gothic Light")
@@ -47,8 +46,8 @@ class Ui_prof(object):
         self.m.setObjectName("m")
 
 
-        self.retranslateUi(prof)
-        QtCore.QMetaObject.connectSlotsByName(prof)
+        self.retranslateUi(Form)
+        QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, prof):
         _translate = QtCore.QCoreApplication.translate
@@ -66,8 +65,8 @@ class Ui_prof(object):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    prof = QtWidgets.QWidget()
-    ui = Ui_prof()
-    ui.setupUi(prof)
-    prof.show()
+    window = QtWidgets.QWidget()
+    ui = Ui_Depth()
+    ui.setupUi(window, 0.)
+    window.show()
     sys.exit(app.exec_())
