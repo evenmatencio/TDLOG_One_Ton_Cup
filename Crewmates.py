@@ -1,5 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import TDL_OTC_Data as Data
+import UpdatingSignal
 import Helmsman.HelmsmanMenu as HelmMenu
 import Helmsman.GiteWidget as HelmGite
 import Helmsman.WindAnglewidget as HelmWindAngle
@@ -84,38 +85,59 @@ class Helmsman(CrewMate):
                        road_deviation,
                        boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed)
         self.pressure = pressure
+        
+        # For updating values
+        self.updating_value = UpdatingSignal.UpdatingValue()
+                
         # Window for helmsman menu
         self.main_window_helmsman = QtWidgets.QMainWindow()
         self.ui_helmsman = HelmMenu.Ui_MainWindowHelmsman()
         self.ui_helmsman.setupUi(self.main_window_helmsman)
+
         
         # Widgets for helmsman
         self.gite_window = QtWidgets.QMainWindow()
         self.gite_widget = HelmGite.Ui_GiteWidget()
-        self.gite_widget.setupUi(self.gite_window)
+        #self.gite_window_displayed = False
 
+    
+    def gite_display_and_update(self):
+        self.gite_window.close()
+        #self.gite_widget.lcdNumber.display(int(self.depth.data_import[0]))
+        self.gite_widget.setupUi(self.gite_window, int(self.depth.data_import[0]))
+        self.gite_window.show()
+        self.updating_value.emit_signal()
+        
         
 
     def from_pandas(self, dataframe):
         super().from_pandas(dataframe)
         self.pressure = Data.Pressure.from_pandas(dataframe)
         
+
+        
     
 
 
-    def update(self, i):
-        #Ajouter les widgets des positions gps
-        self.ui_helmsman.depth_widget.depth_value = self.depth[i]
-        self.ui_helmsman.cap_widget.cap_value = self.cap[i]
-        #Ajouter vitesse du courant
-        self.ui_helmsman.wind_angles_widget.true_wind_value = self.wind_angles[0][i]
-        self.ui_helmsman.wind_angles_widget.apparent_wind_value = self.wind_angles[1][i]
-        self.ui_helmsman.wind_speed_widget.true_wind_angle_value = self.wind_angles[0][i]
-        self.ui_helmsman.wind_speed_widget.apparent_wind_angle_value = self.wind_angles[1][i]
-        self.ui_helmsman.VMG_widget.VMG_value = self.speed[1][i]
-        self.ui_helmsman.boat_speed_widget.true_speed_value = self.speed[0][i]
-        self.ui_helmsman.wind_speed_widget.apparent_wind_speed_value = self.speed[0][i]
-        self.ui_helmsman.wind_speed_widget.beaufort_value = self.speed[1][i]
+    def gite_update(self, i):
+    #     # #Ajouter les widgets des positions gps
+    #     # self.ui_helmsman.depth_widget.depth_value = self.depth[i]
+    #     # self.ui_helmsman.cap_widget.cap_value = self.cap[i]
+    #     # #Ajouter vitesse du courant
+    #     # self.ui_helmsman.wind_angles_widget.true_wind_value = self.wind_angles[0][i]
+    #     # self.ui_helmsman.wind_angles_widget.apparent_wind_value = self.wind_angles[1][i]
+    #     # self.ui_helmsman.wind_speed_widget.true_wind_angle_value = self.wind_angles[0][i]
+    #     # self.ui_helmsman.wind_speed_widget.apparent_wind_angle_value = self.wind_angles[1][i]
+    #     # self.ui_helmsman.VMG_widget.VMG_value = self.speed[1][i]
+    #     # self.ui_helmsman.boat_speed_widget.true_speed_value = self.speed[0][i]
+    #     # self.ui_helmsman.wind_speed_widget.apparent_wind_speed_value = self.speed[0][i]
+    #     # self.ui_helmsman.wind_speed_widget.beaufort_value = self.speed[1][i]
+        self.gite_window.close()
+        #self.gite_widget.setupUi(self.gite_window())
+        self.gite_widget.lcdNumber.display(int(self.depth.data_import[i]))
+        self.gite_window.show()
+        print(f"Rentre dans gite_update : depth.data_import = {self.depth.data_import[i]}")
+
 
     def display(self):
         """

@@ -1,7 +1,9 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_GiteWidget(object):
-    def setupUi(self, Form):
+    
+    
+    def setupUi(self, Form, value):
         Form.setObjectName("Form")
         Form.resize(800, 800)
         # self.label = QtWidgets.QLabel(Form)
@@ -14,7 +16,7 @@ class Ui_GiteWidget(object):
         self.lcdNumber.setFrameShadow(QtWidgets.QFrame.Plain)
         self.lcdNumber.setLineWidth(2)
         self.lcdNumber.setMidLineWidth(0)
-        self.lcdNumber.setProperty("intValue", 54)
+        self.lcdNumber.setProperty("intValue", int(value))
         self.lcdNumber.setObjectName("lcdNumber")
         self.textEdit = QtWidgets.QTextEdit(Form)
         self.textEdit.setGeometry(QtCore.QRect(262, 230, 104, 87))
@@ -31,4 +33,6 @@ class Ui_GiteWidget(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
+        
+    
 

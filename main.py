@@ -1,85 +1,60 @@
 import os
 import sys
 import pandas
+import PyQt5
 from PyQt5 import QtCore, QtGui, QtWidgets
-import Helmsman.HelmsmanMenu as HelmMenu
-import Helmsman.GiteWidget as HelmGite
-import Helmsman.WindAnglewidget as HelmWindAngle
-# sys.path.insert(0, os.path.join( os.getcwd(), 'Helmsman') )
-# sys.path.insert(0, os.path.join( os.getcwd(), 'Helmsman', 'widgets'))
+from PyQt5.QtCore import *
 
-'''
-A commenter : 
-    - sur main.py :
-        ¤ L.45/46 
-        ¤ L.63/64
-    - sur Crewmates.py : 
-        ¤ L.3/4/5
-        ¤ L.87-->L.95
-'''
 
 try:
-    import MainWindow
+    import UiMainWindow
     import Crewmates
+    import UpdatingSignal
 
 except Exception as e:
     print(e)
 
 
 
+class OneTonCupGui(QtWidgets.QMainWindow, UiMainWindow.Ui_MainWindow):
+    
+    def __init__(self, dataframe):
+        
+        # Initialisation 
+        #--------------------------------------------------------------------------------------
+        # Constructeur de la classe QtGui.QMainWindow
+        QtWidgets.QMainWindow.__init__(self)
+        # Appel a la methode setupUi de notre Ui_MainWindow
+        self.setupUi(self)
+        
+        # Crewmates managment 
+        # -------------------------------------------------------------------------------------
+        self.helm = Crewmates.Helmsman( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        self.helm.from_pandas(dataframe)
+        
+        # Signals and slots handling
+        #--------------------------------------------------------------------------------------
+        # Boutons du menu principal
+        self.helmsman_button.clicked.connect(self.helm.main_window_helmsman.show)
+        # Boutons des widgets
+        self.helm.ui_helmsman.gite_button.clicked.connect(self.helm.gite_display_and_update)
+        # Gestion de l'actualisation des valeurs
+        self.helm.updating_value.value_changed.connect(self.handle_value_updated)
+
+        
+    def handle_value_updated(self, i):
+        self. helm.gite_update(i)
+        QtWidgets.QApplication.processEvents()
+
+
+
 def main():
-
-    #Initialisation des classes d'equipier, initialisation de l'interface et recuperation des donnees
-    #-----------------------------------------------------------------------------------------------------
-
+    
     dataframe = pandas.read_csv(os.getcwd() + '/Random_data.csv', delimiter=',', header=0)
-    helm = Crewmates.Helmsman( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-    helm.from_pandas(dataframe)
-    #foil = Crew.Foilsman.from_pandas("Brad", dataframe)
-    #wing = Crew.Wingsman.from_pandas("Cristina", dataframe)
-    app = MainWindow.QtWidgets.QApplication(sys.argv)
-
-    #Chargement et affichage de la première fenêtre
-    #------------------------------------------------------------------------------------------------------
-
-    main_window = QtWidgets.QMainWindow()
-    ui = MainWindow.Ui_MainWindow()
-    ui.setupUi(main_window)
-    main_window.show()
-    # helm.main_window_helmsman.show()
-    # helm.gite_window.show()
-
-
-    #Chargement des différentes fenêtres des équipiers : à faire dans les classes crewmate init de l'attribut window de chacun
-    # MainWindowFoil = QtWidgets.QMainWindow()
-    # ui_foil = Ui_MainWindow2()
-    # ui_foil.setupUi(MainWindowFoil)
-    # helm.window = QtWidgets.QMainWindow()
-    # #à faire dans la classe helm
-    # self.window.gite_window.value = self.gite
-    #
-    # helm.ui = Ui_MainWindow2()
-    # ui_helm.setupUi(MainWindowFoil)
-
-    #Choix de l'équipier
-    # ui.foilsman_button.clicked.connect(MainWindowFoil.show)
-    ui.helmsman_button.clicked.connect(helm.main_window_helmsman.show)
-    helm.ui_helmsman.gite_button.clicked.connect(helm.gite_window.show)
-    # helm.ui_helmsman.gite_button.clicked.connect(helm.ui_helmsman.show_gite)
-    # ui.wingsman_button.clicked.connect(MainWindowWing.show)
-    # for i in range(len(dataframe)):
-
-        # dataframe = pandas.read_csv(os.getcwd() + '/Random_data.csv', delimiter=',', header=0)
-        # if(choice_helmsman):
-        #     helm.update()
-        #     #helm a un attribut Helsman_window qui est mis à jour avec update
-        #     ui_helm.button_gite.clicked.connect(show_gite)
-        #     ui_helm.button_gite.clicked.connect(show_gite)
-        # if(choice_wingsman):
-        #
-        # time.sleep(20)
+    app = QtWidgets.QApplication(sys.argv)
+    gui = OneTonCupGui(dataframe)
+    gui.show()
     sys.exit(app.exec_())
-
 
 
 
