@@ -121,7 +121,6 @@ class Helmsman(CrewMate):
 
     
     def depth_display_and_update(self):
-        self.depth_window.close()
         self.depth_widget.setupUi(self.depth_window, int(self.depth.data_import[0]))
         self.depth_window.show()
         self.updating_value.emit_signal()

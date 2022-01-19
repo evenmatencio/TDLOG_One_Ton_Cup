@@ -13,19 +13,21 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_Cap(object):
     def setupUi(self, Form):
-        Form.setObjectName("Form")
+        Form.setObjectName("Cap")
         Form.resize(800, 600)
         self.label = QtWidgets.QLabel(Form)
         self.label.setGeometry(QtCore.QRect(150, -70, 541, 591))
         self.label.setText("")
         self.label.setPixmap(QtGui.QPixmap("roeventcap.jpg"))
         self.label.setObjectName("label")
+        
         self.dial = QtWidgets.QDial(Form)
         self.dial.setGeometry(QtCore.QRect(270, 140, 281, 161))
         self.dial.setMaximum(360)
         self.dial.setWrapping(True)
         self.dial.setNotchesVisible(True)
         self.dial.setObjectName("dial")
+        
         self.label_2 = QtWidgets.QLabel(Form)
         self.label_2.setGeometry(QtCore.QRect(140, 430, 251, 101))
         font = QtGui.QFont()
@@ -33,6 +35,7 @@ class Ui_Cap(object):
         font.setPointSize(24)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
+        
         self.label_3 = QtWidgets.QLabel(Form)
         self.label_3.setGeometry(QtCore.QRect(150, 480, 321, 101))
         font = QtGui.QFont()
@@ -40,12 +43,15 @@ class Ui_Cap(object):
         font.setPointSize(15)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
+        
         self.lcdNumber = QtWidgets.QLCDNumber(Form)
         self.lcdNumber.setGeometry(QtCore.QRect(390, 470, 64, 23))
         self.lcdNumber.setObjectName("lcdNumber")
+        
         self.lcdNumber_2 = QtWidgets.QLCDNumber(Form)
         self.lcdNumber_2.setGeometry(QtCore.QRect(450, 520, 64, 23))
         self.lcdNumber_2.setObjectName("lcdNumber_2")
+        
         self.label_4 = QtWidgets.QLabel(Form)
         self.label_4.setGeometry(QtCore.QRect(460, 450, 31, 51))
         font = QtGui.QFont()
@@ -77,7 +83,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
-    ui = Ui_Form()
+    ui = Ui_Cap()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())

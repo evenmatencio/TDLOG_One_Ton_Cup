@@ -24,6 +24,7 @@ class Ui_Depth(object):
         self.prof_boat.setText("")
         self.prof_boat.setPixmap(QtGui.QPixmap("prof.png"))
         self.prof_boat.setObjectName("prof_boat")
+        
         self.prof_nb = QtWidgets.QLCDNumber(Form)
         self.prof_nb.setGeometry(QtCore.QRect(390, 420, 101, 51))
         self.prof_nb.setFrameShape(QtWidgets.QFrame.Box)

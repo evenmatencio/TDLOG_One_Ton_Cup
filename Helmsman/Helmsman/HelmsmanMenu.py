@@ -34,7 +34,6 @@ class Ui_MainWindowHelmsman(object):
         self.verticalLayout_2.addWidget(self.lineEdit_2)
         self.graphicsView = QtWidgets.QGraphicsView(self.frame)
         self.graphicsView.setObjectName("graphicsView")
-        # self.initialize_view()
         self.verticalLayout_2.addWidget(self.graphicsView)
         self.horizontalLayout.addWidget(self.frame)
         self.frame_2 = QtWidgets.QFrame(self.centralwidget)
@@ -157,16 +156,11 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_HelmsmanWindow()
+    ui = Ui_MainWindowHelmsman()
     ui.setupUi(MainWindow)
     MainWindow.show()
 
-    #Signal managment
-    #=================
-    #Button "map-position"
-    ui.pushButton.clicked.connect(ui.show_gite_widget)
-    #Button "depth"
-    ui.pushButton_2.clicked.connect(ui.show_wind_angle_widget)
+
 
 
 
