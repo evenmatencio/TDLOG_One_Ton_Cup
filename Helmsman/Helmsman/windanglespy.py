@@ -202,12 +202,19 @@ class Ui_WindAngles(object):
         
         # Degree symbol text
         self.label_3 = QtWidgets.QLabel(Form)
-        self.label_3.setGeometry(QtCore.QRect(540, 530, 21, 41))
+        self.label_3.setGeometry(QtCore.QRect(470, 510, 21, 41))
         font = QtGui.QFont()
         font.setFamily("Yu Gothic Light")
         font.setPointSize(24)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
+        self.label_30 = QtWidgets.QLabel(Form)
+        self.label_30.setGeometry(QtCore.QRect(470, 430, 21, 41))
+        font = QtGui.QFont()
+        font.setFamily("Yu Gothic Light")
+        font.setPointSize(24)
+        self.label_30.setFont(font)
+        self.label_30.setObjectName("label_30")
         
         # True wind angle value
         self.lcdNumber_2 = QtWidgets.QLCDNumber(Form)
@@ -232,6 +239,7 @@ class Ui_WindAngles(object):
         Form.setWindowTitle(_translate("Form", "Form"))
         self.label_2.setText(_translate("Form", "Apparent Wind Angle"))
         self.label_3.setText(_translate("Form", "°"))
+        self.label_30.setText(_translate("Form", "°"))
         self.label_5.setText(_translate("Form", "True Wind Angle"))
 
 
