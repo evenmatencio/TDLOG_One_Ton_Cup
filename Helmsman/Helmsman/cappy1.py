@@ -15,6 +15,12 @@ class Ui_Cap(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(800, 600)
+        
+        # Valeur que l'on doit modifier --> mettre le nom de l'attribut de la classe 
+        self.valeur_cap=360
+        # Ecrire self.valeur_cap=cap.value
+        
+        #
         self.label = QtWidgets.QLabel(Form)
         self.label.setGeometry(QtCore.QRect(150, -70, 541, 591))
         self.label.setText("")
@@ -26,6 +32,7 @@ class Ui_Cap(object):
         self.dial.setWrapping(True)
         self.dial.setNotchesVisible(True)
         self.dial.setObjectName("dial")
+        self.dial.setProperty("value", self.valeur_cap+180)
         self.label_2 = QtWidgets.QLabel(Form)
         self.label_2.setGeometry(QtCore.QRect(140, 430, 251, 101))
         font = QtGui.QFont()
@@ -66,7 +73,7 @@ class Ui_Cap(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Cap"))
         self.label_2.setText(_translate("Form", "True direction"))
         self.label_3.setText(_translate("Form", "Deviation from the course:"))
         self.label_4.setText(_translate("Form", "°"))
@@ -77,7 +84,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
-    ui = Ui_Form()
+    ui = Ui_Cap()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())

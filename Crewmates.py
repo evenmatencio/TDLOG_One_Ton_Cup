@@ -4,9 +4,9 @@ import UpdatingSignal
 
 #Import of Helsman's widgets
 import Helmsman.HelmsmanMenu as HelmMenu
+import Helmsman.depth_py as CrewDepth
 import Helmsman.cappy1 as CrewCap
 import Helmsman.windanglespy as CrewWindAngles
-import Helmsman.prof_py as CrewDepth
 import Helmsman.windspeed2 as CrewWindSpeed
 import Helmsman.VMG as CrewSpeed
 
@@ -92,13 +92,20 @@ class CrewMate:
 
 
 class Helmsman(CrewMate):
+<<<<<<< HEAD
+    
+    def __init__(self, name, temperature, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap, \
+                 road_deviation, boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed, pressure):
+        super().__init__(name, temperature, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap, \
+                       road_deviation, boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed)
+        self.pressure = pressure
+=======
     def __init__(self, name, temperature, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
                  road_deviation,
                  boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed):
         super().__init__(name, temperature, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
                        road_deviation,
                        boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed)
-
         
         # For updating values
         self.updating_value = UpdatingSignal.UpdatingValue()
@@ -107,6 +114,14 @@ class Helmsman(CrewMate):
         self.main_window_helmsman = QtWidgets.QMainWindow()
         self.ui_helmsman = HelmMenu.Ui_MainWindowHelmsman()
         self.ui_helmsman.setupUi(self.main_window_helmsman)
+        
+        # Widgets managment 
+        self.widgets_index = {"depth" : 0,
+                              "cap" : 1,
+                              "windspeed" : 2,
+                              "windangle" : 3}
+        self.list_of_widgets = []
+        self.fill_list_of_widgets()
 
         # Widgets for helmsman and its windows
         self.cap_window = QtWidgets.QMainWindow()
@@ -121,21 +136,31 @@ class Helmsman(CrewMate):
         self.boat_speed_widget = CrewSpeed.Ui_VMG()
 
 
+    
+    def fill_list_of_widgets(self):
+        self.list_of_widgets.append({
+            "name" : "depth",
+            "widget" : 2,
+            "values" : [[]]
+            })
+
 
     def depth_update(self, i):
         self.depth_window.close()
-        self.depth_widget.prof_nb.display(int(self.depth.data_import[i]))
-        self.depth_widget.prof_boat.setPixmap(QtGui.QPixmap("Helmsman/Helmsman/prof.png"))
+        self.depth_widget.depth_nb.display(int(self.depth.data_import[i]))
+        self.depth_widget.depth_boat.setPixmap(QtGui.QPixmap("Helmsman/Helmsman/prof.png"))
         self.depth_window.show()
         print(f"depth.data_import = {self.depth.data_import[i]}")
 
 
 
     def depth_display_and_update(self):
-        self.depth_window.close()
         self.depth_widget.setupUi(self.depth_window, int(self.depth.data_import[0]))
         self.depth_window.show()
         self.updating_value.emit_signal()
+        
+    def windspeed_display_and_update(self) :
+        self.wind_speed_widget.setupUi(self.wind_speed_window, int())
         
 
 
@@ -158,8 +183,6 @@ class Helmsman(CrewMate):
         self.ui_helmsman.wind_speed_widget.apparent_wind_angle_value = self.wind_angles[1][i]
         self.ui_helmsman.boat_speed_widget.VMG_value = self.speed[1][i]
 
-#=================================================================================================================
-#=================================================================================================================
 
 class Foilsman(CrewMate):
     def __init__(self, name, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
