@@ -89,7 +89,9 @@ class CrewMate:
         self.wing_angles.print_data()
         self.wind_speed.print_data()
         self.road_deviation.print_data()
-
+        
+#=============================================================================================================
+#==============================================================================================================
 
 class Helmsman(CrewMate):
     def __init__(self, name, temperature, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
@@ -108,15 +110,19 @@ class Helmsman(CrewMate):
         self.ui_helmsman = HelmMenu.Ui_MainWindowHelmsman()
         self.ui_helmsman.setupUi(self.main_window_helmsman)
 
-        # Widgets for helmsman and its windows
+        # Widgets for helmsman and their windows
         self.cap_window = QtWidgets.QMainWindow()
         self.cap_widget = CrewCap.Ui_Cap()
+        
         self.depth_window = QtWidgets.QMainWindow()
         self.depth_widget = CrewDepth.Ui_Depth()
+        
         self.wind_angles_window = QtWidgets.QMainWindow()
         self.wind_angles_widget = CrewWindAngles.Ui_WindAngles()
+        
         self.wind_speed_window = QtWidgets.QMainWindow()
         self.wind_speed_widget = CrewWindSpeed.Ui_WindSpeed()
+        
         self.boat_speed_window = QtWidgets.QMainWindow()
         self.boat_speed_widget = CrewSpeed.Ui_VMG()
 
@@ -135,6 +141,7 @@ class Helmsman(CrewMate):
         self.depth_window.close()
         self.depth_widget.setupUi(self.depth_window, int(self.depth.data_import[0]))
         self.depth_window.show()
+        print(self.depth_widget.isVisible())
         self.updating_value.emit_signal()
         
 
@@ -231,6 +238,7 @@ class Wingsman(CrewMate):
         self.wind_angles_widget = CrewWindAngles.Ui_wind_angles()
         self.wind_speed_window = QtWidgets.QMainWindow()
         self.wind_speed_widget = CrewWindSpeed.Ui_wind_angles()
+        
     def update(self, i):
         self.ui_wingsman.wing_angles_widget.cambrure_value = self.wind_angles[0][i]
         self.ui_wingsman.wing_angles_widget.vrillage_value_1 = self.wind_angles[1][i]
