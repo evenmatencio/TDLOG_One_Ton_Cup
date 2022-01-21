@@ -20,20 +20,6 @@ class Ui_gite_tangage(object):
         self.tangage_value = 54
 
 
-        self.gite = QtWidgets.QLabel(Form)
-        self.gite.setGeometry(QtCore.QRect(-210, -50, 1041, 571))
-        self.gite.setText("")
-        self.gite.setPixmap(QtGui.QPixmap("../../../../Downloads/gite.png"))
-        self.gite.setObjectName("gite")
-
-        self.gite_nb = QtWidgets.QLCDNumber(Form)
-        self.gite_nb.setGeometry(QtCore.QRect(180, 70, 101, 51))
-        self.gite_nb.setFrameShadow(QtWidgets.QFrame.Plain)
-        self.gite_nb.setLineWidth(2)
-        self.gite_nb.setMidLineWidth(0)
-        self.gite_nb.setProperty("intValue", self.gite_value)
-        self.gite_nb.setObjectName("gite_nb")
-
         self.image_gite = QtWidgets.QLabel(Form)
         self.image_gite.setGeometry(QtCore.QRect(0, 0, 641, 531))
         self.image_gite.setText("")
@@ -45,13 +31,6 @@ class Ui_gite_tangage(object):
         self.tangage.setText("")
         self.tangage.setPixmap(QtGui.QPixmap("../tangage.png"))
         self.tangage.setObjectName("tangage")
-        self.tangage_nb = QtWidgets.QLCDNumber(Form)
-        self.tangage_nb.setGeometry(QtCore.QRect(232, 440, 101, 51))
-        self.tangage_nb.setFrameShadow(QtWidgets.QFrame.Plain)
-        self.tangage_nb.setLineWidth(2)
-        self.tangage_nb.setMidLineWidth(0)
-        self.tangage_nb.setProperty("intValue", self.tangage_value)
-        self.tangage_nb.setObjectName("tangage_nb")
 
         self.image_tangage = QtWidgets.QLabel(Form)
         self.image_tangage.setGeometry(QtCore.QRect(150, 350, 641, 531))
@@ -75,7 +54,21 @@ class Ui_gite_tangage(object):
         self.label_tangage.setFont(font)
         self.label_tangage.setObjectName("GiteTangage")
 
+        self.gite_nb = QtWidgets.QLCDNumber(Form)
+        self.gite_nb.setGeometry(QtCore.QRect(180, 70, 101, 51))
+        self.gite_nb.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.gite_nb.setLineWidth(2)
+        self.gite_nb.setMidLineWidth(0)
+        self.gite_nb.setProperty("intValue", self.gite_value)
+        self.gite_nb.setObjectName("gite_nb")
 
+        self.tangage_nb = QtWidgets.QLCDNumber(Form)
+        self.tangage_nb.setGeometry(QtCore.QRect(232, 440, 101, 51))
+        self.tangage_nb.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.tangage_nb.setLineWidth(2)
+        self.tangage_nb.setMidLineWidth(0)
+        self.tangage_nb.setProperty("intValue", self.tangage_value)
+        self.tangage_nb.setObjectName("tangage_nb")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
