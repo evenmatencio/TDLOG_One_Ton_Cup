@@ -3,8 +3,9 @@ import time
 
 class UpdatingValue(QObject):
     
-    def __init__(self):
+    def __init__(self, helm):
         QObject.__init__(self)
+        self.helm = helm
         
     value_changed = pyqtSignal(int)
     
@@ -12,7 +13,7 @@ class UpdatingValue(QObject):
         iteration_time = time.time()
         iteration = 0 
         while(iteration < 10):
-            if (time.time() > 1. + iteration_time):
+            if (time.time() > 0.5 + iteration_time):
                 iteration += 1
                 iteration_time = time.time()
                 self.value_changed.emit(iteration)
