@@ -2,11 +2,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 
-class Ui_MainWindowHelmsman(object):
+class Ui_MainWindowFoilsman(object):
 
 
     def setupUi(self, MainWindow):
-        MainWindow.setObjectName("HelmsmanWindow")
+        MainWindow.setObjectName("FoilsmanWindow")
         MainWindow.resize(846, 686)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -34,6 +34,7 @@ class Ui_MainWindowHelmsman(object):
         self.verticalLayout_2.addWidget(self.lineEdit_2)
         self.graphicsView = QtWidgets.QGraphicsView(self.frame)
         self.graphicsView.setObjectName("graphicsView")
+        # self.initialize_view()
         self.verticalLayout_2.addWidget(self.graphicsView)
         self.horizontalLayout.addWidget(self.frame)
         self.frame_2 = QtWidgets.QFrame(self.centralwidget)
@@ -79,18 +80,18 @@ class Ui_MainWindowHelmsman(object):
         self.speed_button.setObjectName("speed_button")
         self.verticalLayout_3.addWidget(self.speed_button)
 
-        #========Cap button======
-        self.cap_button = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
+        #========Flight height button======
+        self.flight_height_button = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.cap_button.sizePolicy().hasHeightForWidth())
-        self.cap_button.setSizePolicy(sizePolicy)
+        sizePolicy.setHeightForWidth(self.flight_height_button.sizePolicy().hasHeightForWidth())
+        self.flight_height_button.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setFamily("Yu Gothic Light")
-        self.cap_button.setFont(font)
-        self.cap_button.setObjectName("cap_button")
-        self.verticalLayout_3.addWidget(self.cap_button)
+        self.flight_height_button.setFont(font)
+        self.flight_height_button.setObjectName("flight_height_button")
+        self.verticalLayout_3.addWidget(self.flight_height_button)
 
         #==============Depth button========
         self.depth_button = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
@@ -131,6 +132,19 @@ class Ui_MainWindowHelmsman(object):
         self.wind_speed_button.setObjectName("wind_speed_button")
         self.verticalLayout_3.addWidget(self.wind_speed_button)
 
+        #===========Gite&Tangage button===============
+        self.gite_button = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.MinimumExpanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.gite_button.sizePolicy().hasHeightForWidth())
+        self.gite_button.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setFamily("Yu Gothic Light")
+        self.gite_button.setFont(font)
+        self.gite_button.setObjectName("gite_button")
+        self.verticalLayout_3.addWidget(self.gite_button)
+
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout.addWidget(self.scrollArea)
         self.horizontalLayout.addWidget(self.frame_2)
@@ -149,17 +163,24 @@ class Ui_MainWindowHelmsman(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("HelmsmanWindow", "HemlsmanWindow"))
-        self.lineEdit_2.setText(_translate("HelmsmanWindow", "Helmsman"))
-        self.lineEdit.setText(_translate("HelmsmanWindow", "Menu"))
-        self.speed_button.setText(_translate("HelmsmanWindow", "Speed"))
-        self.cap_button.setText(_translate("HelmsmanWindow", "Cap"))
-        self.depth_button.setText(_translate("HelmsmanWindow", "Depth"))
-        self.wind_angles_button.setText(_translate("HelmsmanWindow", "Wind Angles"))
-        self.wind_speed_button.setText(_translate("HelmsmanWindow", "Wind Speed"))
+        MainWindow.setWindowTitle(_translate("FoilsmanWindow", "FoilsmanWindow"))
+        self.lineEdit_2.setText(_translate("FoilsmanWindow", "Foilsman"))
+        self.lineEdit.setText(_translate("FoilsmanWindow", "Menu"))
+        self.speed_button.setText(_translate("FoilsmanWindow", "Speed"))
+        self.flight_height_button.setText(_translate("FoilsmanWindow", "Flight Height"))
+        self.depth_button.setText(_translate("FoilsmanWindow", "Depth"))
+        self.wind_angles_button.setText(_translate("FoilsmanWindow", "Wind Angles"))
+        self.wind_speed_button.setText(_translate("FoilsmanWindow", "Wind Speed"))
+        self.gite_button.setText(_translate("FoilsmanWindow", "Gite&Tangage"))
 
 
 
+
+    # def initialize_view(self):
+    #      self.test_scene = QtWidgets.QGraphicsScene(0, 0, 100, 100)
+    #      self.gite = Ui_GiteWidget()
+    #      self.gite.setupUi(self.test_scene)
+    #      self.graphicsView.setScene(self.test_scene)
 
 
 
@@ -168,9 +189,19 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindowHelmsman()
+    ui = Ui_MainWindowFoilsman()
     ui.setupUi(MainWindow)
     MainWindow.show()
+
+    #Signal managment
+    #=================
+    #Button "map-position"
+    #ui.pushButton.clicked.connect(ui.show_gite_widget)
+    #Button "depth"
+    #ui.pushButton_2.clicked.connect(ui.show_wind_angle_widget)
+
+
+
 
     sys.exit(app.exec_())
 

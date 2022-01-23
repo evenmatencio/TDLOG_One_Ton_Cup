@@ -1,7 +1,9 @@
 setup.py
-Helmsman/GiteWidget.py
+Helmsman/roeventcap.jpg
 Helmsman/HelmsmanMenu.py
-Helmsman/WindAnglewidget.py
+Helmsman/cappy1.py
+Helmsman/windanglespy.py
+Helmsman/windspeed2.py
 Helmsman/__init__.py
 Helmsman.egg-info/PKG-INFO
 Helmsman.egg-info/SOURCES.txt

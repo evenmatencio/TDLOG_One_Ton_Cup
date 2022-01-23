@@ -15,15 +15,21 @@ class Ui_WindAngles(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(783, 676)
+        
+        # Wind rose picture
         self.label = QtWidgets.QLabel(Form)
         self.label.setGeometry(QtCore.QRect(0, -180, 921, 1021))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("../Cap/RoseVents.jpg"))
+        self.label.setPixmap(QtGui.QPixmap("RoseVents.jpg"))
         self.label.setIndent(0)
         self.label.setObjectName("label")
+        
+        # Initialisation of the dial
         self.dial = QtWidgets.QDial(Form)
         self.dial.setEnabled(True)
         self.dial.setGeometry(QtCore.QRect(310, 180, 181, 181))
+        
+        # Style and brush parameters for dial
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -160,12 +166,15 @@ class Ui_WindAngles(object):
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ToolTipText, brush)
+        
         self.dial.setPalette(palette)
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(False)
         font.setWeight(50)
         font.setStrikeOut(False)
+        
+        # Dial parameters
         self.dial.setFont(font)
         self.dial.setMaximum(360)
         self.dial.setPageStep(2)
@@ -175,6 +184,8 @@ class Ui_WindAngles(object):
         self.dial.setNotchTarget(25.0)
         self.dial.setNotchesVisible(True)
         self.dial.setObjectName("dial")
+        
+        # Apparent wind angle text
         self.label_2 = QtWidgets.QLabel(Form)
         self.label_2.setGeometry(QtCore.QRect(300, 380, 361, 51))
         font = QtGui.QFont()
@@ -182,21 +193,36 @@ class Ui_WindAngles(object):
         font.setPointSize(14)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
+        
+        # Apparent wind angle value
         self.lcdNumber = QtWidgets.QLCDNumber(Form)
         self.lcdNumber.setGeometry(QtCore.QRect(360, 430, 91, 41))
         self.lcdNumber.setProperty("value", 30.0)
         self.lcdNumber.setObjectName("lcdNumber")
+        
+        # Degree symbol text
         self.label_3 = QtWidgets.QLabel(Form)
-        self.label_3.setGeometry(QtCore.QRect(540, 530, 21, 41))
+        self.label_3.setGeometry(QtCore.QRect(470, 510, 21, 41))
         font = QtGui.QFont()
         font.setFamily("Yu Gothic Light")
         font.setPointSize(24)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
+        self.label_30 = QtWidgets.QLabel(Form)
+        self.label_30.setGeometry(QtCore.QRect(470, 430, 21, 41))
+        font = QtGui.QFont()
+        font.setFamily("Yu Gothic Light")
+        font.setPointSize(24)
+        self.label_30.setFont(font)
+        self.label_30.setObjectName("label_30")
+        
+        # True wind angle value
         self.lcdNumber_2 = QtWidgets.QLCDNumber(Form)
         self.lcdNumber_2.setGeometry(QtCore.QRect(360, 510, 91, 41))
         self.lcdNumber_2.setProperty("value", 45.0)
         self.lcdNumber_2.setObjectName("lcdNumber_2")
+        
+        # True wind angle text
         self.label_5 = QtWidgets.QLabel(Form)
         self.label_5.setGeometry(QtCore.QRect(310, 460, 361, 51))
         font = QtGui.QFont()
@@ -213,6 +239,7 @@ class Ui_WindAngles(object):
         Form.setWindowTitle(_translate("Form", "Form"))
         self.label_2.setText(_translate("Form", "Apparent Wind Angle"))
         self.label_3.setText(_translate("Form", "°"))
+        self.label_30.setText(_translate("Form", "°"))
         self.label_5.setText(_translate("Form", "True Wind Angle"))
 
 
@@ -220,7 +247,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
-    ui = Ui_Form()
+    ui = Ui_WindAngles()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())

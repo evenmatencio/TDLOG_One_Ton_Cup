@@ -1,0 +1,9 @@
+setup.py
+Wingsman/WingsmanMenu.py
+Wingsman/cambrure_vrillage_py.py
+Wingsman/__init__.py
+Wingsman.egg-info/PKG-INFO
+Wingsman.egg-info/SOURCES.txt
+Wingsman.egg-info/dependency_links.txt
+Wingsman.egg-info/not-zip-safe
+Wingsman.egg-info/top_level.txt
