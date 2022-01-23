@@ -34,15 +34,23 @@ class OneTonCupGui(QtWidgets.QMainWindow, UiMainWindow.Ui_MainWindow):
         self.helmsman_button.clicked.connect(self.helm.main_window_helmsman.show)
         # Boutons des widgets
         self.helm.ui_helmsman.depth_button.clicked.connect(self.helm.depth_display_and_update)
-        self.helm.ui_helmsman.gite_button.clicked.connect(self.helm.windspeed_display_and_update)
+        self.helm.ui_helmsman.wind_speed_button.clicked.connect(self.helm.windspeed_display_and_update)
         # Gestion de l'actualisation des valeurs
+        # self.helm.updating_value.value_changed.connect(self.handle_value_updated)
         self.helm.updating_value.value_changed.connect(self.handle_value_updated)
 
         
+
+        
     def handle_value_updated(self, i):
-        self. helm.depth_update(i)
-        self.helm.wind
+        # if(sum(window.isVisible() for window in self.helm.displayed_widget) == 1) :
+        #     self.helm.correct_slot(i)
+        self.helm.correct_slot(i)
+        # else :
+        # print("c'est la sauce")
+        # self.helm.correct_slot(i)   
         QtWidgets.QApplication.processEvents()
+
 
 
 
