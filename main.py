@@ -27,17 +27,24 @@ class OneTonCupGui(QtWidgets.QMainWindow, UiMainWindow.Ui_MainWindow):
         # -------------------------------------------------------------------------------------
         self.helm = Crewmates.Helmsman( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
         self.helm.from_pandas(dataframe)
+        self.foil = Crewmates.Foilsman(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        self.foil.from_pandas(dataframe)
+        
         
         # Signals and slots handling
         #--------------------------------------------------------------------------------------
         # Boutons du menu principal
         self.helmsman_button.clicked.connect(self.helm.main_window_helmsman.show)
+        self.foilsman_button.clicked.connect(self.foil.main_window_foilsman.show)
         # Boutons des widgets
+        # Helsmamn
         self.helm.ui_helmsman.depth_button.clicked.connect(self.helm.depth_display_and_update)
         self.helm.ui_helmsman.wind_speed_button.clicked.connect(self.helm.windspeed_display_and_update)
+        # Foilsman
+        self.foil.ui_foilsman.depth_button.clicked.connect(self.foil.depth_display_and_update)
         # Gestion de l'actualisation des valeurs
-        # self.helm.updating_value.value_changed.connect(self.handle_value_updated)
         self.helm.updating_value.value_changed.connect(self.handle_value_updated)
+        self.foil.updating_value.value_changed.connect(self.handle_value_updated)
 
         
 
@@ -45,7 +52,10 @@ class OneTonCupGui(QtWidgets.QMainWindow, UiMainWindow.Ui_MainWindow):
     def handle_value_updated(self, i):
         # if(sum(window.isVisible() for window in self.helm.displayed_widget) == 1) :
         #     self.helm.correct_slot(i)
-        self.helm.correct_slot(i)
+        if(self.foil.main_window_foilsman.isVisible()) :
+            self.foil.correct_slot(i)
+        if(self.helm.main_window_helmsman.isVisible()) :
+            self.helm.correct_slot(i)
         # else :
         # print("c'est la sauce")
         # self.helm.correct_slot(i)   

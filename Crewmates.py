@@ -36,9 +36,8 @@ import Foilsman.gite_tangage_py as CrewGite
 
 class CrewMate:
 
-    def __init__(self, name, temperature, boat_coordinates, depth, buoy_coordinates, stream_velocity, cap,
-                 road_deviation,
-                 boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed):
+    def __init__(self, name, temperature, boat_coordinates, depth, buoy_coordinates, stream_velocity, cap, \
+                 road_deviation, boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed):
         self.name = name
         self.temperature = temperature
         self.boat_coordinates = boat_coordinates
@@ -122,7 +121,7 @@ class Helmsman(CrewMate):
         
         
         # Widgets managment 
-        self.displayed_widget = [self.depth_window,
+        self.list_of_windows = [self.depth_window,
                                  self.cap_window,
                                  self.wind_angles_window,
                                  self.wind_speed_window,
@@ -208,39 +207,38 @@ class Helmsman(CrewMate):
         self.ui_helmsman.boat_speed_widget.VMG_value = self.speed[1][i]
 
 
+
 class Foilsman(CrewMate):
-    def __init__(self, name, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
-                 road_deviation,
-                 boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed):
-        super().__init__(self, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
-                         road_deviation,
-                         boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed)
+    def __init__(self, name, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,  \
+                 road_deviation, boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed):
+        super().__init__(self, name, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap, \
+                         road_deviation, boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed)
         # For updating values
-        self.updating_value = UpdatingSignal.UpdatingValue()
+        self.updating_value = UpdatingSignal.UpdatingValue(self)
         # Window for foilsman menu
         self.main_window_foilsman = QtWidgets.QMainWindow()
-        self.ui_foilsman = FoilMenu.Ui_MainWindowHelmsman()
+        self.ui_foilsman = FoilMenu.Ui_MainWindowFoilsman()
         self.ui_foilsman.setupUi(self.main_window_foilsman)
         # Widgets for foilsman and its windows
         #Coordonnées du bateau et des bouées ?
         #Road_deviation ?
         #Ajouter la vitesse vraie du bateau au widget VMG
         self.wind_angles_window = QtWidgets.QMainWindow()
-        self.wind_angles_widget = CrewWindAngles.Ui_wind_angles()
+        self.wind_angles_widget = CrewWindAngles.Ui_WindAngles()
         self.wind_speed_window = QtWidgets.QMainWindow()
-        self.wind_speed_widget = CrewWindSpeed.Ui_wind_angles()
+        self.wind_speed_widget = CrewWindSpeed.Ui_WindSpeed()
         self.gite_window = QtWidgets.QMainWindow()
         self.gite_widget = CrewGite.Ui_gite_tangage()
         self.depth_window = QtWidgets.QMainWindow()
         self.depth_widget = CrewDepth.Ui_Depth()
         self.flight_height_window = QtWidgets.QMainWindow()
-        self.flight_height_widget = CrewFlightHeight.Ui_Depth()
+        self.flight_height_widget = CrewFlightHeight.Ui_flight_height()
         self.boat_speed_window = QtWidgets.QMainWindow()
         self.boat_speed_widget = CrewSpeed.Ui_VMG()
 
         # Widgets managment
-        self.displayed_widget = [self.depth_window,
-                                 self.cap_window,
+        self.list_of_windows = [self.depth_window,
+                                 self.gite_window,
                                  self.wind_angles_window,
                                  self.wind_speed_window,
                                  self.boat_speed_window,
@@ -249,7 +247,6 @@ class Foilsman(CrewMate):
         self.correct_slot = None
 
     def depth_update(self, i):
-        self.depth_window.close()
         self.depth_widget.depth_nb.display(int(self.depth.data_import[i]))
         self.depth_widget.depth_boat.setPixmap(QtGui.QPixmap("Helmsman/Helmsman/depth.png"))
         # self.depth_widget.update(self.depth.data_import[i])
