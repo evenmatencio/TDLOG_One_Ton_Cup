@@ -17,12 +17,12 @@ class Ui_WindAngles(object):
         Form.resize(783, 676)
         
         # Wind rose picture
-        self.label = QtWidgets.QLabel(Form)
-        self.label.setGeometry(QtCore.QRect(0, -180, 921, 1021))
-        self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("RoseVents.jpg"))
-        self.label.setIndent(0)
-        self.label.setObjectName("label")
+        self.img_rosevents = QtWidgets.QLabel(Form)
+        self.img_rosevents.setGeometry(QtCore.QRect(0, -180, 921, 1021))
+        self.img_rosevents.setText("")
+        self.img_rosevents.setPixmap(QtGui.QPixmap("RoseVents.jpg"))
+        self.img_rosevents.setIndent(0)
+        self.img_rosevents.setObjectName("Image Rose des vents")
         
         # Initialisation of the dial
         self.dial = QtWidgets.QDial(Form)
@@ -194,11 +194,17 @@ class Ui_WindAngles(object):
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
         
-        # Apparent wind angle value
-        self.lcdNumber = QtWidgets.QLCDNumber(Form)
-        self.lcdNumber.setGeometry(QtCore.QRect(360, 430, 91, 41))
-        self.lcdNumber.setProperty("value", 30.0)
-        self.lcdNumber.setObjectName("lcdNumber")
+        # Apparent wind angle value apparent
+        self.apparent_wind_angle_nb = QtWidgets.QLCDNumber(Form)
+        self.apparent_wind_angle_nb.setGeometry(QtCore.QRect(360, 430, 91, 41))
+        self.apparent_wind_angle_nb.setProperty("value", 30.0)
+        self.apparent_wind_angle_nb.setObjectName("Apparent Wind Angle")
+        
+        # True wind angle value
+        self.true_wind_angle_nb = QtWidgets.QLCDNumber(Form)
+        self.true_wind_angle_nb.setGeometry(QtCore.QRect(360, 510, 91, 41))
+        self.true_wind_angle_nb.setProperty("value", 45.0)
+        self.true_wind_angle_nb.setObjectName("True Wind Angle")
         
         # Degree symbol text
         self.label_3 = QtWidgets.QLabel(Form)
@@ -216,11 +222,7 @@ class Ui_WindAngles(object):
         self.label_30.setFont(font)
         self.label_30.setObjectName("label_30")
         
-        # True wind angle value
-        self.lcdNumber_2 = QtWidgets.QLCDNumber(Form)
-        self.lcdNumber_2.setGeometry(QtCore.QRect(360, 510, 91, 41))
-        self.lcdNumber_2.setProperty("value", 45.0)
-        self.lcdNumber_2.setObjectName("lcdNumber_2")
+       
         
         # True wind angle text
         self.label_5 = QtWidgets.QLabel(Form)
