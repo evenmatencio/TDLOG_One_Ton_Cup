@@ -169,6 +169,25 @@ class Helmsman(CrewMate):
         QtWidgets.QApplication.processEvents()
         self.wind_speed_window.show()
         self.updating_value.emit_signal()
+
+    def windspeed_update(self, i):
+        self.wind_speed_window.close()
+        self.wind_speed_widget.lcdNumber.display(self.wind_speed.data_import.loc[i][0])
+        self.wind_speed_widget.lcdNumber_2.display(self.wind_speed.data_import.loc[i][1])
+        self.wind_speed_widget.dial.setValue(int(self.wind_speed.data_import.loc[i][0]))
+        self.wind_speed_widget.label.setPixmap(QtGui.QPixmap("Helmsman/Helmsman/vitessevent.png"))
+        # self.wind_speed_widget.update(self.wind_speed.data_import.loc[i])
+        self.wind_speed_window.show()
+        # self.updating_value.emit_signal()
+        print(f"wind_speed.data_import = {self.wind_speed.data_import.loc[i]}")
+
+    def windspeed_display_and_update(self):
+        self.wind_speed_widget.setupUi(self.wind_speed_window, self.wind_speed.data_import.loc[0])
+        self.correct_slot = self.windspeed_update
+        self.windspeed_update(0)
+        QtWidgets.QApplication.processEvents()
+        self.wind_speed_window.show()
+        self.updating_value.emit_signal()
         
         
         
@@ -224,11 +243,11 @@ class Foilsman(CrewMate):
         self.boat_speed_widget = CrewSpeed.Ui_VMG()
 
         # Widgets managment
-        self.displayed_widget = [self.depth_window,
-                                 self.cap_window,
+        self.list_of_windows = [self.depth_window,
                                  self.wind_angles_window,
                                  self.wind_speed_window,
                                  self.boat_speed_window,
+                                 self.gite_window,
                                  self.flight_height_window]
 
         self.correct_slot = None
@@ -237,11 +256,8 @@ class Foilsman(CrewMate):
         self.depth_window.close()
         self.depth_widget.depth_nb.display(int(self.depth.data_import[i]))
         self.depth_widget.depth_boat.setPixmap(QtGui.QPixmap("Helmsman/Helmsman/depth.png"))
-        # self.depth_widget.update(self.depth.data_import[i])
         self.depth_window.show()
         print(f"depth.data_import = {self.depth.data_import[i]}")
-        # if(self.depth_window.isVisible()):
-        #     self.updating_value.emit_signal()
 
     def depth_display_and_update(self):
         self.depth_widget.setupUi(self.depth_window, int(self.depth.data_import[0]))
@@ -250,6 +266,24 @@ class Foilsman(CrewMate):
         self.depth_window.show()
         QtWidgets.QApplication.processEvents()
         self.updating_value.emit_signal()
+
+
+    def boat_angles_display_and_update(self):
+        self.gite_widget.setupUi(self.gite_window, int(self.boat_angles.data_import[0]))
+        self.correct_slot = self.boat_angles_update
+        self.boat_angles_update(0)
+        self.gite_window.show()
+        QtWidgets.QApplication.processEvents()
+        self.updating_value.emit_signal()
+
+    def boat_angles_update(self, i):
+        self.gite_widget.gite_nb.display(int(self.boat_angles.data_importloc[i][0]))
+        self.gite_widget.tangage_nb.display(int(self.boat_angles.data_importloc[i][0]))
+        self.gite_widget.image_gite.setPixmap(QtGui.QPixmap("Foilsman/Foilsman/gite.png"))
+        self.gite_widget.image_tangage.setPixmap(QtGui.QPixmap("Foilsman/Foilsman/tangage.png"))
+        self.gite_window.show()
+        print(f"boat_angles.data_import = {self.depth.data_import.loc[i]}")
+
 
 
     def update(self, i):
