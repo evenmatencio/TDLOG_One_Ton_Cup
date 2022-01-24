@@ -291,7 +291,7 @@ class Ui_MainWindow(object):
         self.helmsman_button.setMouseTracking(False)
         self.helmsman_button.setFocusPolicy(QtCore.Qt.NoFocus)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../../Downloads/anchor-g19b1b4592_1280.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("anchor.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.helmsman_button.setIcon(icon)
         self.helmsman_button.setObjectName("helmsman_button")
         self.wingsman_button = QtWidgets.QPushButton(self.centralwidget)
