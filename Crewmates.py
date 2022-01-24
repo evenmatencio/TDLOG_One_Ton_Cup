@@ -215,7 +215,7 @@ class Helmsman(CrewMate):
           self.wind_angles_widget.true_wind_angle_nb.display(int(self.wind_angles.data_import.loc[i][0]))
           self.wind_angles_widget.apparent_wind_angle_nb.display(int(self.wind_angles.data_import.loc[i][1]))
           self.wind_angles_widget.dial.setValue(int(self.wind_speed.data_import.loc[i][0]))
-          self.wind_angles_widget.img_rosevents.setPixmap(QtGui.QPixmap("Helmsman/Helmsman/roeventcap.png"))
+          self.wind_angles_widget.img_rosevents.setPixmap(QtGui.QPixmap("Helmsman/Helmsman/RoseVents.png"))
           self.wind_angles_window.show()
           #self.depth_widget.update(self.depth.data_import[i])
           self.wind_angles_window.show()
