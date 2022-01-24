@@ -43,12 +43,27 @@ class OneTonCupGui(QtWidgets.QMainWindow, UiMainWindow.Ui_MainWindow):
 
         
     def handle_value_updated(self, i):
+
+        if (self.helm.depth_window.isVisible()):
+            self. helm.depth_update(i)
+        # The other update functions are not yet  defined, so I invented a name for them.
+        
+        # elif (self.helm.wind_angles_window.isVisible()): 
+        #     self. helm.wind_angles_update(i) Widget des angles au vent
+        
+        # elif (self.helm.wind_speed_window.isVisible):
+        #     self.update.wind_speed_update(i) Widget de la vitesse du vent
+            
+        # elif (self.helm.boat_speed_window.isVisible()):
+        #     self.update.boat_speed_window_update(i) Widget de la VMG
+
         # if(sum(window.isVisible() for window in self.helm.displayed_widget) == 1) :
         #     self.helm.correct_slot(i)
         self.helm.correct_slot(i)
         # else :
         # print("c'est la sauce")
         # self.helm.correct_slot(i)   
+
         QtWidgets.QApplication.processEvents()
 
 
