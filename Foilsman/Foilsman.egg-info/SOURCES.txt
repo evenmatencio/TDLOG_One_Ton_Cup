@@ -1,10 +1,10 @@
 setup.py
-Foilsman/gite_tangage_py.py
 Foilsman/FoilsmanMenu.py
-Foilsman/flight_height_py.py
-Foilsman/tangage.png
-Foilsman/gite.png
 Foilsman/__init__.py
+Foilsman/flight_height_py.py
+Foilsman/gite.png
+Foilsman/gite_tangage_py.py
+Foilsman/tangage.png
 Foilsman.egg-info/PKG-INFO
 Foilsman.egg-info/SOURCES.txt
 Foilsman.egg-info/dependency_links.txt
