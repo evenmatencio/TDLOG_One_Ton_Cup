@@ -42,6 +42,7 @@ class OneTonCupGui(QtWidgets.QMainWindow, UiMainWindow.Ui_MainWindow):
         self.helm.ui_helmsman.wind_speed_button.clicked.connect(self.helm.windspeed_display_and_update)
         # Foilsman
         self.foil.ui_foilsman.depth_button.clicked.connect(self.foil.depth_display_and_update)
+        self.foil.ui_foilsman.gite_button.clicked.connect(self.foil.boat_angles_display_and_update)
         # Gestion de l'actualisation des valeurs
         self.helm.updating_value.value_changed.connect(self.handle_value_updated)
         self.foil.updating_value.value_changed.connect(self.handle_value_updated)
