@@ -21,11 +21,11 @@ class Ui_Cap(object):
         # Ecrire self.valeur_cap=cap.value
         
         #Cap image
-        self.label = QtWidgets.QLabel(Form)
-        self.label.setGeometry(QtCore.QRect(150, -70, 541, 591))
-        self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("roeventcap.jpg"))
-        self.label.setObjectName("label")
+        self.cap_picture = QtWidgets.QLabel(Form)
+        self.cap_picture.setGeometry(QtCore.QRect(150, -70, 541, 591))
+        self.cap_picture.setText("")
+        self.cap_picture.setPixmap(QtGui.QPixmap("roeventcap.jpg"))
+        self.cap_picture.setObjectName("label")
 
         #Dial
         self.dial = QtWidgets.QDial(Form)
@@ -36,7 +36,7 @@ class Ui_Cap(object):
         self.dial.setObjectName("dial")
         self.dial.setProperty("value", self.valeur_cap+180)
 
-        #True direction
+        #True direction text
         self.label_2 = QtWidgets.QLabel(Form)
         self.label_2.setGeometry(QtCore.QRect(140, 430, 251, 101))
         font = QtGui.QFont()
@@ -45,7 +45,7 @@ class Ui_Cap(object):
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
 
-        #Deviation
+        #Deviation text
         self.label_3 = QtWidgets.QLabel(Form)
         self.label_3.setGeometry(QtCore.QRect(150, 480, 321, 101))
         font = QtGui.QFont()
@@ -54,19 +54,19 @@ class Ui_Cap(object):
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
 
-        #Number True direction
-        self.lcdNumber = QtWidgets.QLCDNumber(Form)
-        self.lcdNumber.setGeometry(QtCore.QRect(390, 470, 64, 23))
-        self.lcdNumber.setObjectName("lcdNumber")
-        self.lcdNumber.setProperty("value", 20)
+        #Number for True direction
+        self.true_direction_value = QtWidgets.QLCDNumber(Form)
+        self.true_direction_value.setGeometry(QtCore.QRect(390, 470, 64, 23))
+        self.true_direction_value.setObjectName("true_direction_value")
+        self.true_direction_value.setProperty("value", 20)
 
-        #Number
-        self.lcdNumber_2 = QtWidgets.QLCDNumber(Form)
-        self.lcdNumber_2.setGeometry(QtCore.QRect(450, 520, 64, 23))
-        self.lcdNumber_2.setObjectName("lcdNumber_2")
-        self.lcdNumber_2.setProperty("value", 18.2)
+        #Number for the deviation
+        self.deviation_value = QtWidgets.QLCDNumber(Form)
+        self.deviation_value.setGeometry(QtCore.QRect(450, 520, 64, 23))
+        self.deviation_value.setObjectName("deviation_value")
+        self.deviation_value.setProperty("value", 18.2)
 
-        #Degree
+        #Degree texts
         self.label_4 = QtWidgets.QLabel(Form)
         self.label_4.setGeometry(QtCore.QRect(460, 450, 31, 51))
         font = QtGui.QFont()

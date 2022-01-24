@@ -4,6 +4,8 @@ Helmsman/HelmsmanMenu.py
 Helmsman/cappy1.py
 Helmsman/windanglespy.py
 Helmsman/windspeed2.py
+Helmsman/depth_py.py
+Helsmamn/VMG.py
 Helmsman/__init__.py
 Helmsman.egg-info/PKG-INFO
 Helmsman.egg-info/SOURCES.txt
