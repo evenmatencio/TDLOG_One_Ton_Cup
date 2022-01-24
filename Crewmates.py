@@ -15,9 +15,9 @@ import Foilsman.FoilsmanMenu as FoilMenu
 import Foilsman.flight_height_py as CrewFlightHeight
 import Foilsman.gite_tangage_py as CrewGite
 
-# #Import of Wingsman's widgets
-# import Wingsman.WingsmanMenu as WingMenu
-# import Wingsman.cambrure_vrillage_py as CrewWingAngles
+#Import of Wingsman's widgets
+import Wingsman.WingsmanMenu as WingMenu
+import Wingsman.cambrure_vrillage_py as CrewWingAngles
 
 """This module contains the classes for the different members of the sailing team"""
 
@@ -38,6 +38,7 @@ class CrewMate:
 
     def __init__(self, name, temperature, boat_coordinates, depth, buoy_coordinates, stream_velocity, cap, \
                  road_deviation, boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed):
+        #==================Name and data======================
         self.name = name
         self.temperature = temperature
         self.boat_coordinates = boat_coordinates
@@ -52,6 +53,19 @@ class CrewMate:
         self.wing_angles = wing_angles
         self.wind_speed = wind_speed
         self.wind_angles = wind_angles
+
+        #==========Updating value===========
+        self.updating_value = UpdatingSignal.UpdatingValue(self)
+
+        #===========Windows and common widgets==================
+        self.wind_angles_window = QtWidgets.QMainWindow()
+        self.wind_angles_widget = CrewWindAngles.Ui_WindAngles()
+
+        self.wind_speed_window = QtWidgets.QMainWindow()
+        self.wind_speed_widget = CrewWindSpeed.Ui_WindSpeed()
+
+        self.boat_speed_window = QtWidgets.QMainWindow()
+        self.boat_speed_widget = CrewSpeed.Ui_VMG()
 
 
     def from_pandas(self, dataframe):
@@ -69,7 +83,57 @@ class CrewMate:
         self.wind_angles = Data.WindAngles.from_pandas(dataframe)
         self.wind_speed = Data.WindSpeed.from_pandas(dataframe)
 
+# UPDATING WINDSPEED=============================================
+    def windspeed_update(self, i):
+        self.wind_speed_widget.lcdNumber.display(self.wind_speed.data_import.loc[i][0])
+        self.wind_speed_widget.lcdNumber_2.display(self.wind_speed.data_import.loc[i][1])
+        self.wind_speed_widget.dial.setValue(int(self.wind_speed.data_import.loc[i][0]))
+        self.wind_speed_widget.label.setPixmap(QtGui.QPixmap("Helmsman/Helmsman/vitessevent.png"))
+        self.wind_speed_window.show()
+        print(f"wind_speed.data_import = {self.wind_speed.data_import.loc[i]}")
 
+    def windspeed_display_and_update(self):
+        self.wind_speed_widget.setupUi(self.wind_speed_window, self.wind_speed.data_import.loc[0])
+        self.correct_slot = self.windspeed_update
+        self.windspeed_update(0)
+        QtWidgets.QApplication.processEvents()
+        self.wind_speed_window.show()
+        self.updating_value.emit_signal()
+
+    # UPDATING WINDANGLES VALUES ============================================================
+    def wind_angles_update(self, i):
+        self.wind_angles_widget.true_wind_angle_nb.display(int(self.wind_angles.data_import.loc[i][0]))
+        self.wind_angles_widget.apparent_wind_angle_nb.display(int(self.wind_angles.data_import.loc[i][1]))
+        self.wind_angles_widget.dial.setValue(int(self.wind_angles.data_import.loc[i][0]))
+        self.wind_angles_widget.img_rosevents.setPixmap(QtGui.QPixmap("Helmsman/Helmsman/RoseVents.jpg"))
+        self.wind_angles_window.show()
+        # self.depth_widget.update(self.depth.data_import[i])
+        self.wind_angles_window.show()
+        print(f"wind_angles.data_import = {self.wind_angles.data_import.loc[i]}")
+
+    def wind_angles_display_and_update(self):
+        self.wind_angles_widget.setupUi(self.wind_angles_window)
+        self.correct_slot = self.wind_angles_update
+        self.wind_angles_update(0)
+        self.wind_angles_window.show()
+        QtWidgets.QApplication.processEvents()
+        self.updating_value.emit_signal()
+
+    # UPDATING BOATSPEED=================================================
+    def boatspeed_update(self, i):
+        self.boat_speed_widget.vmg_nb.display(self.speed.data_import.loc[i][1])
+        self.boat_speed_widget.wind_angle_nb.display(self.wind_angles.data_import.loc[i][1])
+        self.boat_speed_widget.label.setPixmap(QtGui.QPixmap("VMG.png"))
+        self.boat_speed_window.show()
+        print(f"speed.data_import = {self.speed.data_import.loc[i][1]}")
+
+    def boatspeed_display_and_update(self):
+        self.boat_speed_widget.setupUi(self.boat_speed_window, self.speed.data_import.loc[0])
+        self.correct_slot = self.boatspeed_update
+        self.boatspeed_update(0)
+        QtWidgets.QApplication.processEvents()
+        self.boat_speed_window.show()
+        self.updating_value.emit_signal()
 
     def display(self):
         self.road_deviation.print_data()
@@ -95,13 +159,11 @@ class CrewMate:
 class Helmsman(CrewMate):
     
     def __init__(self, name, temperature, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap, \
-                 road_deviation, boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed, pressure):
+                 road_deviation, boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed):
         super().__init__(name, temperature, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap, \
                        road_deviation, boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed)
-        self.pressure = pressure
-        
-        # For updating values
-        self.updating_value = UpdatingSignal.UpdatingValue(self)
+
+
 
         # Window for helmsman menu
         self.main_window_helmsman = QtWidgets.QMainWindow()
@@ -116,15 +178,6 @@ class Helmsman(CrewMate):
         self.depth_window = QtWidgets.QMainWindow()
         self.depth_widget = CrewDepth.Ui_Depth()
         
-        self.wind_angles_window = QtWidgets.QMainWindow()
-        self.wind_angles_widget = CrewWindAngles.Ui_WindAngles()
-        
-        self.wind_speed_window = QtWidgets.QMainWindow()
-        self.wind_speed_widget = CrewWindSpeed.Ui_WindSpeed()
-        
-        self.boat_speed_window = QtWidgets.QMainWindow()
-        self.boat_speed_widget = CrewSpeed.Ui_VMG()
-        
         
         # Widgets managment 
         self.list_of_windows = [self.depth_window,
@@ -136,7 +189,6 @@ class Helmsman(CrewMate):
         self.correct_slot = None
 
 # UPDATING DEPTH VALUES ============================================================
-    
 
     def depth_update(self, i):
         self.depth_widget.depth_nb.display(int(self.depth.data_import[i]))
@@ -151,46 +203,7 @@ class Helmsman(CrewMate):
         self.depth_update(0)
         self.depth_window.show()
         QtWidgets.QApplication.processEvents()
-
         self.updating_value.emit_signal()
-        
-
-# UPDATING WINDSPEED VALUES ============================================================
-    def windspeed_update(self, i):
-        #self.wind_speed_window.close()
-        self.wind_speed_widget.lcdNumber.display(self.wind_speed.data_import.loc[i][0])
-        self.wind_speed_widget.lcdNumber_2.display(self.wind_speed.data_import.loc[i][1])
-        self.wind_speed_widget.dial.setValue(int(self.wind_speed.data_import.loc[i][0]))
-        self.wind_speed_widget.label.setPixmap(QtGui.QPixmap("Helmsman/Helmsman/vitessevent.png"))
-        # self.wind_speed_widget.update(self.wind_speed.data_import.loc[i])
-        self.wind_speed_window.show()
-        # self.updating_value.emit_signal()
-        print(f"wind_speed.data_import = {self.wind_speed.data_import.loc[i]}")
- 
-        
-    def windspeed_display_and_update(self) :
-        self.wind_speed_widget.setupUi(self.wind_speed_window, self.wind_speed.data_import.loc[0])
-        self.correct_slot = self.windspeed_update
-        self.windspeed_update(0)
-        QtWidgets.QApplication.processEvents()
-        self.wind_speed_window.show()
-        self.updating_value.emit_signal()
-
-
-
-# UPDATING WINDSPEED VALUES ============================================================
-
-    def windspeed_update(self, i):
-        self.wind_speed_window.close()
-        self.wind_speed_widget.lcdNumber.display(self.wind_speed.data_import.loc[i][0])
-        self.wind_speed_widget.lcdNumber_2.display(self.wind_speed.data_import.loc[i][1])
-        self.wind_speed_widget.dial.setValue(int(self.wind_speed.data_import.loc[i][0]))
-        self.wind_speed_widget.label.setPixmap(QtGui.QPixmap("Helmsman/Helmsman/vitessevent.png"))
-        # self.wind_speed_widget.update(self.wind_speed.data_import.loc[i])
-        self.wind_speed_window.show()
-        # self.updating_value.emit_signal()
-        print(f"wind_speed.data_import = {self.wind_speed.data_import.loc[i]}")
-
 
         
 # UPDATING CAP VALUES ============================================================
@@ -211,35 +224,28 @@ class Helmsman(CrewMate):
         self.cap_window.show()
         self.updating_value.emit_signal()
 
-
-# UPDATING WINDANGLES VALUES ============================================================
     
     def wind_angles_update(self, i):
-          self.wind_angles_widget.true_wind_angle_nb.display(int(self.wind_angles.data_import.loc[i][0]))
-          self.wind_angles_widget.apparent_wind_angle_nb.display(int(self.wind_angles.data_import.loc[i][1]))
-          self.wind_angles_widget.dial.setValue(int(self.wind_angles.data_import.loc[i][0]))
-          self.wind_angles_widget.img_rosevents.setPixmap(QtGui.QPixmap("Helmsman/Helmsman/RoseVents.jpg"))
-          self.wind_angles_window.show()
-          #self.depth_widget.update(self.depth.data_import[i])
-          self.wind_angles_window.show()
-          print(f"wind_angles.data_import = {self.wind_angles.data_import.loc[i]}")
-         
+        super().wind_angles_update(i)
 
     def wind_angles_display_and_update(self):
-          self.wind_angles_widget.setupUi(self.wind_angles_window)
-          self.correct_slot = self.wind_angles_update
-          self.wind_angles_update(0)
-          self.wind_angles_window.show()
-          QtWidgets.QApplication.processEvents()
+        super().wind_angles_display_and_update()
 
-          self.updating_value.emit_signal()
+    def boatspeed_update(self, i):
+        super().boatspeed_update(i)
 
-# =============================================================================================
-    
+    def boatspeed_display_and_update(self):
+        super().boatspeed_display_and_update()
+
+    def windspeed_update(self, i):
+        super().windspeed_update(i)
+
+    def windspeed_display_and_update(self):
+        super().windspeed_display_and_update()
 
     def from_pandas(self, dataframe):
         super().from_pandas(dataframe)
-        
+
 
     def update(self, i):
         #Ajouter les coordinnées des bouées et des bateaux ?
@@ -259,8 +265,6 @@ class Helmsman(CrewMate):
 
 
 
-
-
 class Foilsman(CrewMate):
     def __init__(self, name, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
                  road_deviation,
@@ -268,28 +272,22 @@ class Foilsman(CrewMate):
         super().__init__(self, name, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
                          road_deviation,
                          boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed)
-        # For updating values
-        self.updating_value = UpdatingSignal.UpdatingValue(self)
+
         # Window for foilsman menu
         self.main_window_foilsman = QtWidgets.QMainWindow()
         self.ui_foilsman = FoilMenu.Ui_MainWindowFoilsman()
         self.ui_foilsman.setupUi(self.main_window_foilsman)
+
         # Widgets for foilsman and its windows
         #Coordonnées du bateau et des bouées ?
         #Road_deviation ?
         #Ajouter la vitesse vraie du baetau au widget VMG
-        self.wind_angles_window = QtWidgets.QMainWindow()
-        self.wind_angles_widget = CrewWindAngles.Ui_WindAngles()
-        self.wind_speed_window = QtWidgets.QMainWindow()
-        self.wind_speed_widget = CrewWindSpeed.Ui_WindSpeed()
         self.gite_window = QtWidgets.QMainWindow()
         self.gite_widget = CrewGite.Ui_gite_tangage()
         self.depth_window = QtWidgets.QMainWindow()
         self.depth_widget = CrewDepth.Ui_Depth()
         self.flight_height_window = QtWidgets.QMainWindow()
         self.flight_height_widget = CrewFlightHeight.Ui_flight_height()
-        self.boat_speed_window = QtWidgets.QMainWindow()
-        self.boat_speed_widget = CrewSpeed.Ui_VMG()
 
 
         self.list_of_windows = [self.depth_window,
@@ -301,6 +299,7 @@ class Foilsman(CrewMate):
 
         self.correct_slot = None
 
+# UPDATING DEPTH==================================
     def depth_update(self, i):
         self.depth_widget.depth_nb.display(int(self.depth.data_import[i]))
         self.depth_widget.depth_boat.setPixmap(QtGui.QPixmap("Helmsman/Helmsman/depth.png"))
@@ -315,7 +314,7 @@ class Foilsman(CrewMate):
         QtWidgets.QApplication.processEvents()
         self.updating_value.emit_signal()
 
-
+#UPDATING BOAT ANGLES ==================================================
     def boat_angles_display_and_update(self):
         self.gite_widget.setupUi(self.gite_window)
         self.correct_slot = self.boat_angles_update
@@ -333,39 +332,39 @@ class Foilsman(CrewMate):
         print(f"boat_angles.data_import = {self.boat_angles.data_import.loc[i]}")
 
     def windspeed_update(self, i):
-        self.wind_speed_window.close()
-        self.wind_speed_widget.lcdNumber.display(self.wind_speed.data_import.loc[i][0])
-        self.wind_speed_widget.lcdNumber_2.display(self.wind_speed.data_import.loc[i][1])
-        self.wind_speed_widget.dial.setValue(int(self.wind_speed.data_import.loc[i][0]))
-        self.wind_speed_widget.label.setPixmap(QtGui.QPixmap("Helmsman/Helmsman/vitessevent.png"))
-        # self.wind_speed_widget.update(self.wind_speed.data_import.loc[i])
-        self.wind_speed_window.show()
-        # self.updating_value.emit_signal()
-        print(f"wind_speed.data_import = {self.wind_speed.data_import.loc[i]}")
+        super().windspeed_update(i)
 
     def windspeed_display_and_update(self):
-        self.wind_speed_widget.setupUi(self.wind_speed_window, self.wind_speed.data_import.loc[0])
-        self.correct_slot = self.windspeed_update
-        self.windspeed_update(0)
-        QtWidgets.QApplication.processEvents()
-        self.wind_speed_window.show()
-        self.updating_value.emit_signal()
+        super().windspeed_display_and_update()
+
+    def wind_angles_update(self, i):
+        super().wind_angles_update(i)
+
+    def wind_angles_display_and_update(self):
+        super().wind_angles_display_and_update()
 
     def boatspeed_update(self, i):
-        self.boat_speed_window.close()
-        self.boat_speed_widget.vmg_nb.display(self.speed.data_import.loc[i][1])
-        self.boat_speed_widget.wind_angle_nb.display(self.wind_angles.data_import.loc[i][1])
-        self.boat_speed_widget.label.setPixmap(QtGui.QPixmap("VMG.png"))
-        self.boat_speed_window.show()
-        print(f"speed.data_import = {self.speed.data_import.loc[i][1]}")
+        super().boatspeed_update(i)
 
     def boatspeed_display_and_update(self):
-        self.boat_speed_widget.setupUi(self.boat_speed_window, self.boat_speed.data_import.loc[0])
-        self.correct_slot = self.boatspeed_update
-        self.boatspeed_update(0)
+        super().boatspeed_display_and_update()
+
+#UPDATING FLIGHT HIGHT=====================================
+    def flight_height_update(self, i):
+        self.flight_height_widget.fh_nb.display(self.flight_height.data_import[i])
+        self.flight_height_window.show()
+        print(f"flight_height.data_import = {self.flight_height.data_import[i]}")
+
+    def flight_height_display_and_update(self):
+        self.flight_height_widget.setupUi(self.flight_height_window)
+        self.correct_slot = self.flight_height_update
+        self.flight_height_update(0)
         QtWidgets.QApplication.processEvents()
-        self.boat_speed_window.show()
+        self.flight_height_window.show()
         self.updating_value.emit_signal()
+
+    def from_pandas(self, dataframe):
+        super().from_pandas(dataframe)
 
     def update(self, i):
         self.ui_foilsman.gite_widget.gite_value = self.boat_angles[0][i]
@@ -381,41 +380,74 @@ class Foilsman(CrewMate):
 
 
 
-# class Wingsman(CrewMate):
-#     def __init__(self, name, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
-#                  road_deviation,
-#                  boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed):
-#         super().__init__(self, name, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
-#                          road_deviation,
-#                          boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed)
-#         # For updating values
-#         self.updating_value = UpdatingSignal.UpdatingValue()
+class Wingsman(CrewMate):
+    def __init__(self, name, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
+                 road_deviation,
+                 boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed):
+        super().__init__(self, name, gps_coordinates, depth, buoy_coordinates, stream_velocity, cap,
+                         road_deviation,
+                         boat_angles, speed, flight_height, wing_angles, wind_angles, wind_speed)
 
-#         # Window for wingsman menu
-#         self.main_window_wingsman = QtWidgets.QMainWindow()
-#         self.ui_wingsman = WingMenu.Ui_MainWindowWingsman()
-#         self.ui_wingsman.setupUi(self.main_window_wingsman)
+        # Window for wingsman menu
+        self.main_window_wingsman = QtWidgets.QMainWindow()
+        self.ui_wingsman = WingMenu.Ui_MainWindowWingsman()
+        self.ui_wingsman.setupUi(self.main_window_wingsman)
 
-#         # Widgets for helmsman and its windows
-#         #Coordonnées du bateau et des bouées?
-#         #Road deviation
-#         self.boat_speed_window = QtWidgets.QMainWindow()
-#         self.boat_speed_widget = CrewSpeed.Ui_VMG()
-#         self.wing_angles_window = QtWidgets.QMainWindow()
-#         self.wing_angles_widget = CrewWingAngles.Ui_VMG()
-#         self.wind_angles_window = QtWidgets.QMainWindow()
-#         self.wind_angles_widget = CrewWindAngles.Ui_wind_angles()
-#         self.wind_speed_window = QtWidgets.QMainWindow()
-#         self.wind_speed_widget = CrewWindSpeed.Ui_wind_angles()
-        
-#     def update(self, i):
-#         self.ui_wingsman.wing_angles_widget.cambrure_value = self.wind_angles[0][i]
-#         self.ui_wingsman.wing_angles_widget.vrillage_value_1 = self.wind_angles[1][i]
-#         self.ui_wingsman.wing_angles_widget.vrillage_value_2 = self.wind_angles[2][i]
-#         self.ui_wingsman.boat_speed_widget.VMG_value = self.speed[1][i]
-#         self.ui_wingsman.wind_angles_widget.true_wind_value = self.wind_angles[0][i]
-#         self.ui_wingsman.wind_angles_widget.apparent_wind_value = self.wind_angles[1][i]
-#         self.ui_wingsman.wind_speed_widget.true_wind_angle_value = self.wind_angles[0][i]
-#         self.ui_wingsman.wind_speed_widget.apparent_wind_angle_value = self.wind_angles[1][i]
+        # Widgets for helmsman and its windows
+        #Coordonnées du bateau et des bouées?
+        #Road deviation
+        self.wing_angles_window = QtWidgets.QMainWindow()
+        self.wing_angles_widget = CrewWingAngles.Ui_VMG()
+
+
+        self.list_of_windows = [self.wing_angles_window,
+                                self.wind_angles_window,
+                                self.wind_speed_window,
+                                self.boat_speed_window]
+
+        self.correct_slot = None
+
+
+#UPDATING WING ANGLES======================================
+    def wing_angles_update(self, i):
+        self.wing_angles_widget.vmg_nb.display(self.speed.data_import.loc[i][1])
+        self.wing_angles_widget.twisting1_nb.display(self.wing_angles.data_import.loc[i][0])
+        self.wing_angles_widget.twisting2_nb.display(self.wing_angles.data_import.loc[i][1])
+        self.wing_angles_widget.camber_nb.display(self.wing_angles.data_import.loc[i][2])
+        self.wing_angles_window.show()
+        print(f"wing_angles.data_import = {self.wing_angles.data_import.loc[i][1]}")
+
+    def wing_angles_display_and_update(self):
+        self.wing_angles_widget.setupUi(self.wing_angles_window)
+        self.correct_slot = self.wing_angles_update
+        self.wing_angles_update(0)
+        QtWidgets.QApplication.processEvents()
+        self.wing_angles_window.show()
+        self.updating_value.emit_signal()
+
+    def boatspeed_update(self, i):
+        super().boatspeed_update(i)
+
+    def boatspeed_display_and_update(self):
+        super().boatspeed_display_and_update()
+
+    def windspeed_update(self, i):
+        super().windspeed_update(i)
+
+    def windspeed_display_and_update(self):
+        super().windspeed_display_and_update()
+
+    def from_pandas(self, dataframe):
+        super().from_pandas(dataframe)
+
+    def update(self, i):
+        self.ui_wingsman.wing_angles_widget.cambrure_value = self.wing_angles[0][i]
+        self.ui_wingsman.wing_angles_widget.vrillage_value_1 = self.wing_angles[1][i]
+        self.ui_wingsman.wing_angles_widget.vrillage_value_2 = self.wing_angles[2][i]
+        self.ui_wingsman.boat_speed_widget.VMG_value = self.speed[1][i]
+        self.ui_wingsman.wind_angles_widget.true_wind_value = self.wind_angles[0][i]
+        self.ui_wingsman.wind_angles_widget.apparent_wind_value = self.wind_angles[1][i]
+        self.ui_wingsman.wind_speed_widget.true_wind_angle_value = self.wind_speed[0][i]
+        self.ui_wingsman.wind_speed_widget.apparent_wind_angle_value = self.wind_speed[1][i]
 
 

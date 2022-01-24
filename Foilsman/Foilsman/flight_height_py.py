@@ -35,7 +35,7 @@ class Ui_flight_height(object):
         self.fh_nb.setProperty("intValue", abs(self.flight_height_value))
         self.fh_nb.setObjectName("fh_nb")
 
-        #m pour mètres text edit
+        #m pour mètres
         self.m = QtWidgets.QLabel(Form)
         self.m.setGeometry(QtCore.QRect(540, 340, 41, 51))
         font = QtGui.QFont()
