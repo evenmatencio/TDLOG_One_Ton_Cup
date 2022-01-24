@@ -126,6 +126,7 @@ class Helmsman(CrewMate):
         self.boat_speed_window = QtWidgets.QMainWindow()
         self.boat_speed_widget = CrewSpeed.Ui_VMG()
         
+        
         # Widgets managment 
         self.displayed_widget = [self.depth_window,
                                  self.cap_window,
@@ -137,14 +138,10 @@ class Helmsman(CrewMate):
 
 
     def depth_update(self, i):
-        self.depth_window.close()
         self.depth_widget.depth_nb.display(int(self.depth.data_import[i]))
         self.depth_widget.depth_boat.setPixmap(QtGui.QPixmap("Helmsman/Helmsman/depth.png"))
-        #self.depth_widget.update(self.depth.data_import[i])
         self.depth_window.show()
         print(f"depth.data_import = {self.depth.data_import[i]}")
-        # if(self.depth_window.isVisible()):
-        #     self.updating_value.emit_signal()
 
 
     def depth_display_and_update(self):
@@ -158,7 +155,7 @@ class Helmsman(CrewMate):
 
     
     def windspeed_update(self, i):
-        self.wind_speed_window.close()
+        #self.wind_speed_window.close()
         self.wind_speed_widget.lcdNumber.display(self.wind_speed.data_import.loc[i][0])
         self.wind_speed_widget.lcdNumber_2.display(self.wind_speed.data_import.loc[i][1])
         self.wind_speed_widget.dial.setValue(int(self.wind_speed.data_import.loc[i][0]))
@@ -175,6 +172,24 @@ class Helmsman(CrewMate):
         self.windspeed_update(0)
         QtWidgets.QApplication.processEvents()
         self.wind_speed_window.show()
+        self.updating_value.emit_signal()
+        
+    
+    def cap_update(self, i):
+        self.cap_window.close()
+        self.cap_widget.true_direction_value.display(int(self.cap.data_import[i]))
+        self.cap_widget.deviation_value.display(int(self.road_deviation.data_import[i]))
+        self.cap_widget.cap_picture.setPixmap(QtGui.QPixmap("Helmsman/Helmsman/roeventcap.jpg"))
+        self.cap_window.show()
+        print(f"cap.data_import = {self.cap.data_import[i]}")
+
+
+    def depth_display_and_update(self):
+        self.depth_widget.setupUi(self.depth_window, int(self.depth.data_import[0]))
+        self.correct_slot = self.depth_update
+        self.depth_update(0)
+        self.depth_window.show()
+        QtWidgets.QApplication.processEvents()
         self.updating_value.emit_signal()
         
         
