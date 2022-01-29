@@ -5,21 +5,13 @@ from queue import Queue
 
 
 class OneTonCupData:
-    def __init__(self):
-        self.data_table = Queue(maxsize=0)
-        self.data_import = None
-
-    def load_data(self):
-        return self.data_table.full
-
-    def print_data(self):
-        print(self.data_import)
+    def __init__(self, data_import):
+        self.data_import = data_import
 
 
 class BoatGPSCoordinates(OneTonCupData):
     def __init__(self, data_import):
-        super().__init__()
-        self.data_import = data_import
+        super().__init__(data_import)
 
     @staticmethod
     def from_pandas(dataframe):
@@ -29,8 +21,7 @@ class BoatGPSCoordinates(OneTonCupData):
 
 class Depth(OneTonCupData):
     def __init__(self, data_import):
-        super().__init__()
-        self.data_import = data_import
+        super().__init__(data_import)
 
     @staticmethod
     def from_pandas(dataframe):
@@ -40,8 +31,7 @@ class Depth(OneTonCupData):
 
 class BuoyCoordinates(OneTonCupData):
     def __init__(self, data_import):
-        super().__init__()
-        self.data_import = data_import
+        super().__init__(data_import)
 
     @staticmethod
     def from_pandas(dataframe):
@@ -52,8 +42,7 @@ class BuoyCoordinates(OneTonCupData):
 
 class Temperature(OneTonCupData):
     def __init__(self, data_import):
-        super().__init__()
-        self.data_import = data_import
+        super().__init__(data_import)
 
     @staticmethod
     def from_pandas(dataframe):
@@ -63,8 +52,7 @@ class Temperature(OneTonCupData):
 
 class StreamVelocity(OneTonCupData):
     def __init__(self, data_import):
-        super().__init__()
-        self.data_import = data_import
+        super().__init__(data_import)
 
     @staticmethod
     def from_pandas(dataframe):
@@ -74,8 +62,7 @@ class StreamVelocity(OneTonCupData):
 
 class Cap(OneTonCupData):
     def __init__(self, data_import):
-        super().__init__()
-        self.data_import = data_import
+        super().__init__(data_import)
 
     @staticmethod
     def from_pandas(dataframe):
@@ -85,8 +72,7 @@ class Cap(OneTonCupData):
 
 class RoadDeviation(OneTonCupData):
     def __init__(self, data_import):
-        super().__init__()
-        self.data_import = data_import
+        super().__init__(data_import)
 
     @staticmethod
     def from_pandas(dataframe):
@@ -96,8 +82,7 @@ class RoadDeviation(OneTonCupData):
 
 class BoatAngles(OneTonCupData):
     def __init__(self, data_import):
-        super().__init__()
-        self.data_import = data_import
+        super().__init__(data_import)
 
     @staticmethod
     def from_pandas(dataframe):
@@ -107,8 +92,7 @@ class BoatAngles(OneTonCupData):
 
 class Speeds(OneTonCupData):
     def __init__(self, data_import):
-        super().__init__()
-        self.data_import = data_import
+        super().__init__(data_import)
 
     @staticmethod
     def from_pandas(dataframe):
@@ -118,8 +102,7 @@ class Speeds(OneTonCupData):
 
 class FlightHeight(OneTonCupData):
     def __init__(self, data_import):
-        super().__init__()
-        self.data_import = data_import
+        super().__init__(data_import)
 
     @staticmethod
     def from_pandas(dataframe):
@@ -129,8 +112,7 @@ class FlightHeight(OneTonCupData):
 
 class WingAngles(OneTonCupData):
     def __init__(self, data_import):
-        super().__init__()
-        self.data_import = data_import
+        super().__init__(data_import)
 
     @staticmethod
     def from_pandas(dataframe):
@@ -140,8 +122,7 @@ class WingAngles(OneTonCupData):
 
 class WindAngles(OneTonCupData):
     def __init__(self, data_import):
-        super().__init__()
-        self.data_import = data_import
+        super().__init__(data_import)
 
     @staticmethod
     def from_pandas(dataframe):
@@ -151,8 +132,7 @@ class WindAngles(OneTonCupData):
 
 class WindSpeed(OneTonCupData):
     def __init__(self, data_import):
-        super().__init__()
-        self.data_import = data_import
+        super().__init__(data_import)
 
     @staticmethod
     def from_pandas(dataframe):
@@ -162,8 +142,7 @@ class WindSpeed(OneTonCupData):
 
 class Pressure(OneTonCupData):
     def __init__(self, data_import):
-        super().__init__()
-        self.data_import = data_import
+        super().__init__(data_import)
 
     @staticmethod
     def from_pandas(dataframe):
@@ -172,8 +151,7 @@ class Pressure(OneTonCupData):
     
 class BatteryPowerLevel(OneTonCupData):
     def __init__(self, data_import):
-        super().__init__()
-        self.data_import = data_import
+        super().__init__(data_import)
 
     @staticmethod
     def from_pandas(dataframe):

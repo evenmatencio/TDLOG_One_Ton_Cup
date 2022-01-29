@@ -40,6 +40,8 @@ class OneTonCupGui(QtWidgets.QMainWindow, UiMainWindow.Ui_MainWindow):
         # Helsmamn
         self.helm.ui_helmsman.depth_button.clicked.connect(self.helm.depth_display_and_update)
         self.helm.ui_helmsman.wind_speed_button.clicked.connect(self.helm.windspeed_display_and_update)
+        self.helm.ui_helmsman.cap_button.clicked.connect(self.helm.cap_display_and_update)
+        self.helm.ui_helmsman.wind_angles_button.clicked.connect(self.helm.wind_angles_display_and_update)
         # Foilsman
         self.foil.ui_foilsman.depth_button.clicked.connect(self.foil.depth_display_and_update)
         self.foil.ui_foilsman.gite_button.clicked.connect(self.foil.boat_angles_display_and_update)
@@ -51,30 +53,10 @@ class OneTonCupGui(QtWidgets.QMainWindow, UiMainWindow.Ui_MainWindow):
 
         
     def handle_value_updated(self, i):
-
-        if (self.helm.depth_window.isVisible()):
-            self. helm.depth_update(i)
-        # The other update functions are not yet  defined, so I invented a name for them.
-        
-        # elif (self.helm.wind_angles_window.isVisible()): 
-        #     self. helm.wind_angles_update(i) Widget des angles au vent
-        
-        # elif (self.helm.wind_speed_window.isVisible):
-        #     self.update.wind_speed_update(i) Widget de la vitesse du vent
-            
-        # elif (self.helm.boat_speed_window.isVisible()):
-        #     self.update.boat_speed_window_update(i) Widget de la VMG
-
-        # if(sum(window.isVisible() for window in self.helm.displayed_widget) == 1) :
-        #     self.helm.correct_slot(i)
         if(self.foil.main_window_foilsman.isVisible()) :
             self.foil.correct_slot(i)
         if(self.helm.main_window_helmsman.isVisible()) :
             self.helm.correct_slot(i)
-        # else :
-        # print("c'est la sauce")
-        # self.helm.correct_slot(i)   
-
         QtWidgets.QApplication.processEvents()
 
 
@@ -82,7 +64,8 @@ class OneTonCupGui(QtWidgets.QMainWindow, UiMainWindow.Ui_MainWindow):
 
 def main():
     
-    dataframe = pandas.read_csv(os.getcwd() + '/Random_data.csv', delimiter=',', header=0)
+    # dataframe = pandas.read_csv(os.getcwd() + '/Random_data.csv', delimiter=',', header=0)
+    dataframe = pandas.read_csv(os.getcwd() + '/Random_data_72.csv', delimiter=',', header=0)
     app = QtWidgets.QApplication(sys.argv)
     gui = OneTonCupGui(dataframe)
     gui.show()

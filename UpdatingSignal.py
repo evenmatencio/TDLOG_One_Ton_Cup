@@ -14,7 +14,6 @@ class UpdatingValue(QObject):
         iteration = 0 
         while(iteration < 72):
             if(sum(window.isVisible() for window in self.crewmate.list_of_windows)) :
-                #+ sum(window.isVisible() for window in self.foil.list_of_windows) == 1) :
                 if ((time.time() > 0.5 + iteration_time)):
                     iteration += 1
                     iteration_time = time.time()
@@ -22,12 +21,6 @@ class UpdatingValue(QObject):
             else :
                 iteration = 10000000
         
-        # while(time.time() < iteration_time + 1.):
-        #     pass
-        # if(sum(window.isVisible() for window in self.helm.displayed_widget) == 1 and (self.iteration<10)) :
-        #     self.iteration+=1
-        #     self.value_changed.emit(self.iteration)
-        # else : 
-        #     self.iteration = 0
+
 
                         

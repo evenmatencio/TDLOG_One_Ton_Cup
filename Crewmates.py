@@ -157,7 +157,6 @@ class Helmsman(CrewMate):
 
 # UPDATING WINDSPEED VALUES ============================================================
     def windspeed_update(self, i):
-        #self.wind_speed_window.close()
         self.wind_speed_widget.lcdNumber.display(self.wind_speed.data_import.loc[i][0])
         self.wind_speed_widget.lcdNumber_2.display(self.wind_speed.data_import.loc[i][1])
         self.wind_speed_widget.dial.setValue(int(self.wind_speed.data_import.loc[i][0]))
@@ -181,7 +180,6 @@ class Helmsman(CrewMate):
 # UPDATING WINDSPEED VALUES ============================================================
 
     def windspeed_update(self, i):
-        self.wind_speed_window.close()
         self.wind_speed_widget.lcdNumber.display(self.wind_speed.data_import.loc[i][0])
         self.wind_speed_widget.lcdNumber_2.display(self.wind_speed.data_import.loc[i][1])
         self.wind_speed_widget.dial.setValue(int(self.wind_speed.data_import.loc[i][0]))
@@ -333,7 +331,6 @@ class Foilsman(CrewMate):
         print(f"boat_angles.data_import = {self.boat_angles.data_import.loc[i]}")
 
     def windspeed_update(self, i):
-        self.wind_speed_window.close()
         self.wind_speed_widget.lcdNumber.display(self.wind_speed.data_import.loc[i][0])
         self.wind_speed_widget.lcdNumber_2.display(self.wind_speed.data_import.loc[i][1])
         self.wind_speed_widget.dial.setValue(int(self.wind_speed.data_import.loc[i][0]))
@@ -352,7 +349,6 @@ class Foilsman(CrewMate):
         self.updating_value.emit_signal()
 
     def boatspeed_update(self, i):
-        self.boat_speed_window.close()
         self.boat_speed_widget.vmg_nb.display(self.speed.data_import.loc[i][1])
         self.boat_speed_widget.wind_angle_nb.display(self.wind_angles.data_import.loc[i][1])
         self.boat_speed_widget.label.setPixmap(QtGui.QPixmap("VMG.png"))
