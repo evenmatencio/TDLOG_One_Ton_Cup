@@ -18,6 +18,11 @@ in your (anaconda or device) console when located in the folder "Helmsman" (resp
 for the Helmsman package (respectively the Foilsman and Wingsman packages).
 
 
+===========================================================
+The correct code is located on the "clean_packaging" branch.
+===========================================================
+
+
 ###################################
 # Main caracteristics of the code #
 ###################################
