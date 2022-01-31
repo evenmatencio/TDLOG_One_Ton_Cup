@@ -3,6 +3,18 @@ import numpy
 
 """ This module contains the parent Data class for the OTC software project
  and the subclasses related to the different data used in the software """
+ 
+ 
+ 
+""" Reminder : Static methods. Why?
+
+    Static methods can be used without having to create an object of the class before. 
+    
+    Instead of doing :             |         We do :
+    depth= Depth()                 |         Depth.from_pandas(dataframe)
+    depth.from_pandas(dataframe)   |         Better !!
+    
+"""
 
 
 class OneTonCupData:
