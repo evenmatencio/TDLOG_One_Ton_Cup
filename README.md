@@ -28,11 +28,13 @@ Origin of the data:
 The current version of the code is based on a dataset provided by the .csv file "Random_data_x", where "x" indicates the number of figures given 
 for each kind of data. Most of the data contained in this file are unused but can serve as examples for an additional displayed data to one of the crewmates.
 
-Using a .csv file leads to a specific managment of the data. Basically, any function or method whose identifier contains "from_pandas" is dedicated 
-to this, but there always exists a generic method (typically for constructors) that does not depend on the origin of the data. Nonetheless, these functions /
+Using a .csv file leads to a specific managment of the data. Basically, any function or method which identifier contains "from_pandas" is dedicated 
+to this, but there always exists a generic method (typically for constructors) that does not depend on the origin of the data. Nonetheless, these functions/
 methods should be written again according to the container of the data used.
 
-
+Similarly, the class UdpatingValue should be written again in an other context because it assumes that we can only read a limited number of figures for each kind of data.
+The methods "widgets_display_and_update" may also be written again, because they assume that we need to visit each line of a file so as to read the new coming data
+whereas it's more likely that the new coming data are written in the first line so that we just have to read the first line for update. 
 
 
 ######################################
