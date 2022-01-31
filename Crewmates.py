@@ -31,16 +31,22 @@ import Wingsman.cambrure_vrillage_py as CrewWingAngles
 * Equipier en charge de l'aile= Wingsman"""
 
 """The aim is to create a display function proper to each crewmate"""
-"""Choice of variables:
-   Helmsman: Latitude, Longitude, Apparent wind, True wind, Wind Speed, Depth, Velocity Made Good, Buoy_Latitude, Buoy_Longitude, Direction (Cap)
-   Foilsman: Depth, Flight Heigth, Pitching (Tanguage) angle, List angle (angle de list), Deviation from the course, 
-   Wingsman: Vrillage angles, Cambrure angles, Wind Speed, Apparent wind, True Wind """
+
+"""
+Methods widget_name_display_and_update initialize the display of the widget.
+Methdos widget_name_update just update the value of the displayed widget.
+"""
+
 
 
 class CrewMate:
+    """
+    The CrewMate class is the virtual class for the crewmates.
+    """
 
     def __init__(self, wind_angles, wind_speed, speed) :
-        """Initializes the object CrewMate. 
+        """
+        Initializes the object CrewMate. 
         Creates all the objects it needs to work correctly : its own data, windows and widgets.
         """
 
@@ -52,6 +58,9 @@ class CrewMate:
         #========== Updating value ===========
         self.updating_value = UpdatingSignal.UpdatingValue(self)
         self.correct_slot = None
+        # correct_slot is a function that must be called when we are updating the values displayed
+        # here we just initialize the variable
+        # it takes its true value when a widget is dsiplayed
 
         #=========== Windows and common widgets ==================
         
@@ -214,6 +223,9 @@ class Helmsman(CrewMate):
                                  self.wind_angles_window,
                                  self.wind_speed_window,
                                  self.boat_speed_window]
+        # the list_of_windows is used in the emit_signal method of self.updating_value
+        # so as to check wether a window is displayed. 
+        # it's the same for the others crewmates
         
         
     def from_pandas(self, dataframe):

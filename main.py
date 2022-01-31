@@ -9,12 +9,25 @@ import Crewmates
 import UpdatingSignal
 
 
+"""
+PLEASE, have a look at the README file before running the code.
+"""
 
 
 
 class OneTonCupGui(QtWidgets.QMainWindow, UiMainWindow.Ui_MainWindow):
     
+    """
+    The OneTonCupGui class defines the behavior of the implented GUI.
+    The update of the values displayed is managed thanks to the UpdatingValue class, from UpdatingSignal module.
+    """
+    
     def __init__(self, dataframe):
+        
+        """
+        The initialisation of the crewmates is done thanks to static methods which extract the data stored on a .csv file.
+        The correct directory of the data file must be used in the main function.
+        """
                 
 # Initialisation ==============================================================
         
@@ -60,8 +73,9 @@ class OneTonCupGui(QtWidgets.QMainWindow, UiMainWindow.Ui_MainWindow):
         self.foil.updating_value.value_changed.connect(self.handle_value_updated)
         self.wing.updating_value.value_changed.connect(self.handle_value_updated)
 
-        
 
+
+# Slot for updating value =====================================================
         
     def handle_value_updated(self, i):
         if(self.foil.main_window_foilsman.isVisible()) :
@@ -74,10 +88,8 @@ class OneTonCupGui(QtWidgets.QMainWindow, UiMainWindow.Ui_MainWindow):
 
 
 
-
 def main():
     
-    # dataframe = pandas.read_csv(os.getcwd() + '/Random_data.csv', delimiter=',', header=0)
     dataframe = pandas.read_csv(os.getcwd() + '/Random_data_72.csv', delimiter=',', header=0)
     app = QtWidgets.QApplication(sys.argv)
     gui = OneTonCupGui(dataframe)

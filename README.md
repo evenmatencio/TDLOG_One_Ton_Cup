@@ -37,9 +37,23 @@ The methods "widgets_display_and_update" may also be written again, because they
 whereas it's more likely that the new coming data are written in the first line so that we just have to read the first line for update. 
 
 
+Structure of the view :
+¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+
+
+
+
+
+
+
 ######################################
 # Necessary improvements of the code #
 ######################################
 
+
+Quality of the display :
+¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+
+Windows are shown when a widget is selected (clicking on the corresponding button), whereas a more apropriate view would consist in using the QStackWidget
 
 
