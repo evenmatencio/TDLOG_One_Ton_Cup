@@ -15,8 +15,8 @@ class Ui_flight_height(object):
     def setupUi(self, Form):
         self.flight_height_value = 1.12
 
-        flight_height.setObjectName("flight_height")
-        flight_height.resize(800, 800)
+        Form.setObjectName("flight_height")
+        Form.resize(800, 800)
 
 
         self.label_flight_height = QtWidgets.QLabel(Form)
@@ -27,7 +27,7 @@ class Ui_flight_height(object):
         self.label_flight_height.setFont(font)
         self.label_flight_height.setObjectName("flight_height")
 
-        self.fh_nb = QtWidgets.QLCDNumber(flight_height)
+        self.fh_nb = QtWidgets.QLCDNumber(Form)
         self.fh_nb.setGeometry(QtCore.QRect(400, 330, 131, 61))
         self.fh_nb.setFrameShadow(QtWidgets.QFrame.Plain)
         self.fh_nb.setLineWidth(2)
@@ -44,8 +44,8 @@ class Ui_flight_height(object):
         self.m.setFont(font)
         self.m.setObjectName("m")
 
-        self.retranslateUi(flight_height)
-        QtCore.QMetaObject.connectSlotsByName(flight_height)
+        self.retranslateUi(Form)
+        QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, flight_height):
         _translate = QtCore.QCoreApplication.translate

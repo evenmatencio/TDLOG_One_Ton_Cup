@@ -44,11 +44,12 @@ class Ui_VMG(object):
         self.label.setPixmap(QtGui.QPixmap("VMG.png"))
         self.label.setObjectName("label")
 
-        #Angle entre le vent et la vitesse
+
         self.wind_angle_nb = QtWidgets.QLCDNumber(Form)
         self.wind_angle_nb.setGeometry(QtCore.QRect(330, 220, 64, 23))
         self.wind_angle_nb.setObjectName("lcdNumber_2")
         self.wind_angle_nb.setProperty("intValue", 45)
+
 
         self.label_4 = QtWidgets.QLabel(Form)
         self.label_4.setGeometry(QtCore.QRect(400, 190, 41, 81))
@@ -61,9 +62,9 @@ class Ui_VMG(object):
 
         self.label.raise_()
         self.label_2.raise_()
-        self.lcdNumber.raise_()
+        self.vmg_nb.raise_()
         self.label_3.raise_()
-        self.lcdNumber_2.raise_()
+        self.wind_angle_nb.raise_()
         self.label_4.raise_()
 
         self.retranslateUi(Form)

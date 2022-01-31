@@ -6,5 +6,5 @@ setup(name='Wingsman',
       author='Inès Larroche - Prunelle Vogler - Even Matencio',
       author_email='your.name@example.com',
       license='MIT',
-      packages=['Helmsman'],
+      packages=['Wingsman'],
       zip_safe=False)

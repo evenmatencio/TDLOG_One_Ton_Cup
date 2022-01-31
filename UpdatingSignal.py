@@ -1,6 +1,8 @@
 from PyQt5.QtCore import QObject, pyqtSignal
 import time
 
+NUMBER_OF_DATA = 72
+
 class UpdatingValue(QObject):
     
     def __init__(self, crewmate):
@@ -12,7 +14,7 @@ class UpdatingValue(QObject):
     def emit_signal(self):
         iteration_time = time.time()
         iteration = 0 
-        while(iteration < 72):
+        while(iteration < NUMBER_OF_DATA):
             if(sum(window.isVisible() for window in self.crewmate.list_of_windows)) :
                 if ((time.time() > 0.5 + iteration_time)):
                     iteration += 1

@@ -15,7 +15,7 @@ class Ui_Depth(object):
     # def __init__(self, parent=None):
     #     super(Ui_Depth, self).__init__(parent)
     
-    def setupUi(self, Form, value):
+    def setupUi(self, Form):
         Form.setObjectName("depth")
         Form.resize(800, 800)
         Form.setContextMenuPolicy(QtCore.Qt.NoContextMenu)
@@ -34,7 +34,7 @@ class Ui_Depth(object):
         self.depth_nb.setFrameShadow(QtWidgets.QFrame.Plain)
         self.depth_nb.setLineWidth(4)
         self.depth_nb.setMidLineWidth(0)
-        self.depth_nb.setProperty("value", value)
+        self.depth_nb.setProperty("value", 0.)
         self.depth_nb.setObjectName("depth_nb")
 
         # Unit text display
@@ -67,6 +67,6 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     window = QtWidgets.QWidget()
     ui = Ui_Depth()
-    ui.setupUi(window, 0.)
+    ui.setupUi(window)
     window.show()
     sys.exit(app.exec_())
